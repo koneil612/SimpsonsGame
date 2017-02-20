@@ -6,9 +6,11 @@ canvas.height = 800;
 var heroBullets = [];
 
 function bullet(I) {
+    I.x = heroPos.x + 97;
+    I.y = heroPos.y + 22;
     I.active = true;
-    I.xVelocity = 0;
-    I.yVelocity = -I.speed;
+    I.xVelocity = heroPos.dirX;
+    I.yVelocity = heroPos.dirY;
     I.width = 7;
     I.height = 7;
     I.color = "white"
@@ -19,7 +21,7 @@ function bullet(I) {
 
     I.draw = function() {
         context.fillStyle = this.color;
-        context.fillRect(heroPos.x, heroPos.y, this.width, this.height);
+        context.fillRect(I.x, I.y, this.width, this.height)
     };
 
     I.update = function() {
@@ -47,6 +49,7 @@ var heroPos = {
 
 hero.shoot = function() {
     console.log("i'm shooting");
+    console.log(heroBullets);
     var bulletPosition = this.midpoint();
 
     heroBullets.push(bullet({
@@ -154,30 +157,47 @@ window.addEventListener('keydown', function(event) {
     border(hero);
 });
 
-window.addEventListener('keyup', function(event) {
-    var key = event.keyCode;
-    if (key == 37) { //left
-        heroPos.dirX = 0;
-    }
-    if (key == 39) { //right
-        heroPos.dirX = 0;
-    }
-    if (key == 38) { //up
-        heroPos.dirY = 0;
-    }
-    if (key == 40) { //down
-        heroPos.dirY = 0;
-    }
-});
+// window.addEventListener('keyup', function(event) {
+//     var key = event.keyCode;
+//     if (key == 37) { //left
+//         heroPos.dirX = 0;
+//     }
+//     if (key == 39) { //right
+//         heroPos.dirX = 0;
+//     }
+//     if (key == 38) { //up
+//         heroPos.dirY = 0;
+//     }
+//     if (key == 40) { //down
+//         heroPos.dirY = 0;
+//     }
+// });
+
+function collides(a, b) {
+  return a.x < b.x + b.width &&
+         a.x + a.width > b.x &&
+         a.y < b.y + b.height &&
+         a.y + a.height > b.y;
+}
+
+function handleCollisions() {
+  heroBullets.forEach(function(bullet) {
+      if (collides(bullet, zombie)) {
+        console.log("you shot him!");
+        bullet.active = false;
+      }
+    });
+  }
+
 
 function collision(player) {
-    if (heroPos.x +32 < zombiePos.x) {
+    if (heroPos.x +32 < zombiePos.x){
         return false;
-    } else if(zombiePos.x + 32 < heroPos.x) {
+    } else if (zombiePos.x + 32 < heroPos.x) {
       return false;
   } else if (heroPos.y + 32 < zombiePos.y) {
       return false;
-  } else if (zombiePos.y + 32 < heroPos.y) {
+  } else if (zombiePos.y + 32 < heroPos.y ) {
       return false;
     }
     return true;
@@ -187,9 +207,10 @@ function update() {
     heroBullets.forEach(function(bullet) {
         bullet.update()
     });
-    heroBullets = heroBullets.filter(function() {
-        return bullet.active;
+    heroBullets = heroBullets.filter(function(b) {
+       return b.active;
     });
+    handleCollisions();
 }
 
 function draw() {
