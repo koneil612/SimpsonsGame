@@ -9,8 +9,8 @@ function bullet(I) {
     I.x = heroPos.x + 97;
     I.y = heroPos.y + 22;
     I.active = true;
-    I.xVelocity = heroPos.dirX;
-    I.yVelocity = heroPos.dirY;
+    I.xVelocity = heroPos.dirX + 30;
+    I.yVelocity = 0;
     I.width = 7;
     I.height = 7;
     I.color = "white"
@@ -53,7 +53,6 @@ hero.shoot = function() {
     var bulletPosition = this.midpoint();
 
     heroBullets.push(bullet({
-        speed: 5,
         x: bulletPosition.x,
         y: bulletPosition.y
     }));
