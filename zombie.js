@@ -4,16 +4,24 @@ canvas.width = 750;
 canvas.height = 800;
 
 var heroBullets = [];
+var on = false;
 
 function bullet(I) {
-    I.x = heroPos.x + 97;
-    I.y = heroPos.y + 22;
     I.active = true;
-    I.xVelocity = heroPos.dirX + 30;
     I.yVelocity = 0;
     I.width = 7;
     I.height = 7;
     I.color = "white"
+
+    if (on) {
+        I.x = heroPos.x - 5;
+        I.y = heroPos.y + 22;
+        I.xVelocity = heroPos.dirX - 30;
+    } else {
+        I.x = heroPos.x + 97;
+        I.y = heroPos.y + 22;
+        I.xVelocity = heroPos.dirX + 30;
+    }
 
     I.inBounds = function() {
         return I.x >= 0 && I.x <= canvas.width && I.y >= 0 && I.y <= canvas.height;
@@ -111,20 +119,17 @@ function move(player) {
     player.y += player.dirY * player.speed;
     border(player);
 }
+function toggleOn() {
+    on = true;
+    hero.src = "img/wiggumflip.png";
+    return;
+}
 
-var toggle = function() {
-    var on = false;
-    return function() {
-        if(!on) {
-            on = true;
-            hero.src = "img/wiggumflip.png";
-            return;
-        }
-        hero.src = "img/wiggum.png";
-        on = false;
-    };
-}();
-
+function toggleOff() {
+    hero.src = "img/wiggum.png";
+    on = false;
+    return;
+}
 
 window.addEventListener('keydown', function(event) {
 // moving the player around & hitting enter to flip and space to shoot
@@ -147,7 +152,10 @@ window.addEventListener('keydown', function(event) {
     }
     if (key == 13) { //enter (flip)
         event.preventDefault();
-        toggle();
+        if (on) {
+        toggleOff();
+        } else
+        toggleOn();
     }
     if (key == 32) { //spacebar (shoot gun)
         event.preventDefault();
