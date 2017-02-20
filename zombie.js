@@ -86,6 +86,7 @@ var toggle = function() {
 
 
 window.addEventListener('keydown', function(event) {
+// moving the player around & hitting enter to flip and space to shoot
     var key = event.keyCode;
     if (key == 37) { //left
         event.preventDefault();
@@ -200,7 +201,7 @@ function main() {
     moveRandom(zombiePos);
     move(heroPos);
     requestAnimationFrame(main);
-    // 
+    //
     // Bullet.prototype.context;
 	// Bullet.prototype.canvasWidth;
 	// Bullet.prototype.canvasHeight;
