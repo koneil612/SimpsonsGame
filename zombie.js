@@ -236,10 +236,6 @@ function main() {
     move(heroPos);
 
     requestAnimationFrame(main);
-
-    if (collision(hero)) {
-        hero.src = "img/wiggum-zombiesm.png";
-        console.log("you turned into a zombie");    }
 // zombiePos.x+=1;
 
 }
