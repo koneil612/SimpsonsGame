@@ -3,13 +3,36 @@ var context = canvas.getContext("2d");
 canvas.width = 750;
 canvas.height = 800;
 
-// var bullet = new Image();
-// bullet.src = "img/bulletsm.png";
-// var bulletPos = { x: 200,
-// y: 100,
-// dirX: 0,
-// dirY: 0,
-// };
+var heroBullets = [];
+
+function bullet(I) {
+    I.active = true;
+    I.xVelocity = 0;
+    I.yVelocity = -I.speed;
+    I.width = 3;
+    I.height = 3;
+    I.color = "#000"
+
+    I.inBounds = function() {
+        return I.x >= 0 && I.x <= canvas.width && I.y >= 0 && I.y <= canvas.height;
+    };
+
+    I.draw = function() {
+        context.fillStyle = this.color;
+        context.fillRect(heroPos.x, heroPos.y, this.width, this.height);
+    };
+
+    I.update = function() {
+        I.x += I.xVelocity;
+        I.y += I.yVelocity;
+
+        I.active = I.actuve && I.inBounds();
+    };
+
+    return I;
+}
+
+
 
 var hero = new Image();
 hero.src = "img/wiggum.png";
@@ -22,6 +45,29 @@ var heroPos = {
     dirY: 0,
     speed: .8,
     timeout: 25
+};
+
+hero.shoot = function() {
+    var bulletPosition = this.midpoint();
+
+    heroBullets.push(bullet({
+        speed: 5,
+        x: bulletPosition.x,
+        y: bulletPosition.y
+    }));
+    heroBullets.forEach(function(bullet) {
+    bullet.update()
+});
+    heroBullets = heroBullets.filter(function() {
+        return bullet.active;
+});
+};
+
+hero.midpoint = function() {
+    return {
+        x: this.x + this.width/2,
+        y: this.y + this.height/2
+    };
 };
 
 var zombie = new Image();
@@ -110,7 +156,7 @@ window.addEventListener('keydown', function(event) {
     }
     if (key == 32) { //spacebar (shoot gun)
         event.preventDefault();
-        this.Pool();
+        hero.shoot();
     }
     border(hero);
 });
@@ -200,6 +246,10 @@ function main() {
     context.drawImage(zombie, zombiePos.x, zombiePos.y);
     moveRandom(zombiePos);
     move(heroPos);
+
+    heroBullets.forEach(function(bullet) {
+        bullet.draw()
+});
     requestAnimationFrame(main);
     //
     // Bullet.prototype.context;
@@ -212,6 +262,16 @@ function main() {
 }
 // zombiePos.x+=1;
 
-
+// function update() {
+//     });
+//
+//     });
+// }
+//
+// function draw() {
+//     playerBullets.forEach(function(bullet) {
+//         bullet.draw();
+//     });
+// }
 
 main();
