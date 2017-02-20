@@ -9,8 +9,8 @@ function bullet(I) {
     I.x = heroPos.x + 97;
     I.y = heroPos.y + 22;
     I.active = true;
-    I.xVelocity = heroPos.dirX;
-    I.yVelocity = heroPos.dirY;
+    I.xVelocity = heroPos.dirX + 30;
+    I.yVelocity = 0;
     I.width = 7;
     I.height = 7;
     I.color = "white"
@@ -53,7 +53,6 @@ hero.shoot = function() {
     var bulletPosition = this.midpoint();
 
     heroBullets.push(bullet({
-        speed: 5,
         x: bulletPosition.x,
         y: bulletPosition.y
     }));
@@ -173,31 +172,30 @@ window.addEventListener('keydown', function(event) {
 //     }
 // });
 
-function collides(a, b) {
-  return a.x < b.x + b.width &&
-         a.x + a.width > b.x &&
-         a.y < b.y + b.height &&
-         a.y + a.height > b.y;
-}
-
 function handleCollisions() {
   heroBullets.forEach(function(bullet) {
-      if (collides(bullet, zombie)) {
+      if (collision(bullet, zombiePos)) {
         console.log("you shot him!");
+        zombie = "";
         bullet.active = false;
       }
     });
+    if (collision(heroPos, zombiePos)) {
+      console.log("you died SOB");
+      hero.src = "img/wiggum-zombiesm.png";
+      bullet.active = false;
+    }
   }
 
 
-function collision(player) {
-    if (heroPos.x +32 < zombiePos.x){
+function collision(a, b) {
+    if (a.x +32 < b.x){
         return false;
-    } else if (zombiePos.x + 32 < heroPos.x) {
+    } else if (b.x + 32 < a.x) {
       return false;
-  } else if (heroPos.y + 32 < zombiePos.y) {
+  } else if (a.y + 32 < b.y) {
       return false;
-  } else if (zombiePos.y + 32 < heroPos.y ) {
+  } else if (b.y + 32 < a.y ) {
       return false;
     }
     return true;
@@ -234,11 +232,8 @@ function main() {
     if (collision(hero)) {
         hero.src = "img/wiggum-zombiesm.png";
         console.log("you turned into a zombie");    }
-
-    if collision()
-}
 // zombiePos.x+=1;
 
-
+}
 
 main();
