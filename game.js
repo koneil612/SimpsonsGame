@@ -1,28 +1,46 @@
-class Zombie {
-    constructor() {
-    let x = Math.round(Math.random());
-    this.zombie = [
-        'img/bartsm.png',
-        'img/apusm.png',
-        'img/catsm.png',
-        'img/duffmansm.png',
-        'img/grandpasm.png',
-        'img/homersm.png',
-    ],
-    this.pos = {}
-    this.state = {
-            x: 50,
-            y: 250,
-            dirX: 0,
-            dirY: 0,
-            speed: .8,
-            timeout: 25
-        };
-        image: this.zombie[x]
-    } zombie = new Image();
-    zombie.src = Math.floor(Math.random() * 2) - .9;["img/bartsm.png", "img/margesm.png"] ;
-}
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+canvas.width = 750;
+canvas.height = 800;
 
+var heroBullets = [];
+var on = false;
+
+function bullet(I) {
+    I.active = true;
+    I.yVelocity = 0;
+    I.width = 7;
+    I.height = 7;
+    I.color = "white"
+
+    if (on) {
+        I.x = heroPos.x - 5;
+        I.y = heroPos.y + 22;
+        I.xVelocity = heroPos.dirX - 30;
+    } else {
+        I.x = heroPos.x + 97;
+        I.y = heroPos.y + 22;
+        I.xVelocity = heroPos.dirX + 30;
+    }
+
+    I.inBounds = function() {
+        return I.x >= 0 && I.x <= canvas.width && I.y >= 0 && I.y <= canvas.height;
+    };
+
+    I.draw = function() {
+        context.fillStyle = this.color;
+        context.fillRect(I.x, I.y, this.width, this.height)
+    };
+
+    I.update = function() {
+        I.x += I.xVelocity;
+        I.y += I.yVelocity;
+
+        I.active = I.active && I.inBounds();
+    };
+
+    return I;
+}
 
 var hero = new Image();
 hero.src = "img/wiggum.png";
@@ -37,8 +55,52 @@ var heroPos = {
     timeout: 25
 };
 
+hero.shoot = function() {
+    console.log("i'm shooting");
+    console.log(heroBullets);
+    var bulletPosition = this.midpoint();
+
+    heroBullets.push(bullet({
+        x: bulletPosition.x,
+        y: bulletPosition.y
+    }));
+
+};
+
+hero.midpoint = function() {
+    return {
+        x: this.x + this.width/2,
+        y: this.y + this.height/2
+    };
+};
+
+var zombies = [
+    'bartsm.png',
+    'apusm.png',
+    'catsm.png',
+    'duffmansm.png',
+    'grandpasm.png',
+    'homersm.png',
+    'flanderssm.png',
+    'krustysm.png',
+    'lisasm.png',
+    'margesm.png',
+    'martinsm.png',
+    'milhousesm.png',
+    'moesm.png',
+    'mrburnssm.png',
+    'nelsonsm.png',
+    'ottossm.png',
+    'quimbysm.png',
+    'revlovejoysm.png',
+    'skinnersm.png',
+    'snakesm.png',
+    'williesm.png',
+]
+var number = Math.round(Math.random()* 21);
+
 var zombie = new Image();
-zombie.src = Math.floor(Math.random() * 2) - .9;["img/bartsm.png", "img/margesm.png"] ;
+zombie.src = "img/"+ zombies[number];
 
 var zombiePos = {
     x: 50,
