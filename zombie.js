@@ -9,9 +9,9 @@ function bullet(I) {
     I.active = true;
     I.xVelocity = 0;
     I.yVelocity = -I.speed;
-    I.width = 3;
-    I.height = 3;
-    I.color = "#000"
+    I.width = 7;
+    I.height = 7;
+    I.color = "white"
 
     I.inBounds = function() {
         return I.x >= 0 && I.x <= canvas.width && I.y >= 0 && I.y <= canvas.height;
@@ -26,13 +26,11 @@ function bullet(I) {
         I.x += I.xVelocity;
         I.y += I.yVelocity;
 
-        I.active = I.actuve && I.inBounds();
+        I.active = I.active && I.inBounds();
     };
 
     return I;
 }
-
-
 
 var hero = new Image();
 hero.src = "img/wiggum.png";
@@ -48,6 +46,7 @@ var heroPos = {
 };
 
 hero.shoot = function() {
+    console.log("i'm shooting");
     var bulletPosition = this.midpoint();
 
     heroBullets.push(bullet({
@@ -55,12 +54,7 @@ hero.shoot = function() {
         x: bulletPosition.x,
         y: bulletPosition.y
     }));
-    heroBullets.forEach(function(bullet) {
-    bullet.update()
-});
-    heroBullets = heroBullets.filter(function() {
-        return bullet.active;
-});
+
 };
 
 hero.midpoint = function() {
@@ -101,7 +95,6 @@ function moveRandom(player) {
     player.x += player.dirX * player.speed;
     player.y += player.dirY * player.speed;
     if (player.timeout <= 0) {
-        console.log("change dir");
         player.dirX = Math.floor(Math.random() * 3) - .9;
         player.dirY = Math.floor(Math.random() * 3) - .9;
         player.timeout = 25;
@@ -161,67 +154,21 @@ window.addEventListener('keydown', function(event) {
     border(hero);
 });
 
-// function Pool(maxSize) {
-// 	var size = maxSize; // Max bullets allowed in the pool
-// 	var pool = [];
-// 	this.init = function() {
-// 		for (var i = 0; i < size; i++) {
-// 			// Initalize the bullet object
-// 			var bullet = new Bullet();
-// 			bullet.init(0,0, bullet., bulletPos.x, bulletPos.y);
-// 			pool[i] = bullet;
-// 		}
-// 	};
-//
-// 	this.get = function(x, y, speed) {
-// 		if(!pool[size - 1].alive) {
-// 			pool[size - 1].spawn(x, y, speed);
-// 			pool.unshift(pool.pop());
-// 		}
-// 	};
-//
-// 	this.animate = function() {
-// 		for (var i = 0; i < size; i++) {
-// 			// Only draw until we find a bullet that is not alive
-// 			if (pool[i].alive) {
-// 				if (pool[i].draw()) {
-// 					pool[i].clear();
-// 					pool.push((pool.splice(i,1))[0]);
-// 				}
-// 			}
-// 			else
-// 				break;
-// 		}
-// 	};
-// }
-//
-// function Bullet() {
-// 	this.alive = false;
-// 	this.spawn = function(x, y, speed) {
-// 		this.x = x;
-// 		this.y = y;
-// 		this.speed = speed;
-// 		this.alive = true;
-// 	};
-//
-// 	this.draw = function() {
-// 		this.context.clearRect(this.x, this.y, this.width, this.height);
-// 		this.y -= this.speed;
-// 		if (this.y <= 0 - this.height) {
-// 			return true;
-// 		}
-// 		else {
-// 			this.context.drawImage(imageRepository.bullet, this.x, this.y);
-// 		}
-// 	};
-// 	this.clear = function() {
-// 		this.x = 0;
-// 		this.y = 0;
-// 		this.speed = 0;
-// 		this.alive = false;
-// 	};
-// }
-// Bullet.prototype = new Drawable();
+window.addEventListener('keyup', function(event) {
+    var key = event.keyCode;
+    if (key == 37) { //left
+        heroPos.dirX = 0;
+    }
+    if (key == 39) { //right
+        heroPos.dirX = 0;
+    }
+    if (key == 38) { //up
+        heroPos.dirY = 0;
+    }
+    if (key == 40) { //down
+        heroPos.dirY = 0;
+    }
+});
 
 function collision(player) {
     if (heroPos.x +32 < zombiePos.x) {
@@ -236,25 +183,32 @@ function collision(player) {
     return true;
   }
 
+function update() {
+    heroBullets.forEach(function(bullet) {
+        bullet.update()
+    });
+    heroBullets = heroBullets.filter(function() {
+        return bullet.active;
+    });
+}
 
-function main() {
+function draw() {
     var bgImage = new Image();
     bgImage.src = "img/locations/background.png";
     context.drawImage(bgImage, 0, 0);
     context.drawImage(hero, heroPos.x, heroPos.y);
-    // context.drawImage(bullet, heroPos.x, heroPos.y);
     context.drawImage(zombie, zombiePos.x, zombiePos.y);
+    heroBullets.forEach(function(bullet) {
+        bullet.draw()
+    });
+}
+function main() {
+    draw();
+    update();
     moveRandom(zombiePos);
     move(heroPos);
 
-    heroBullets.forEach(function(bullet) {
-        bullet.draw()
-});
     requestAnimationFrame(main);
-    //
-    // Bullet.prototype.context;
-	// Bullet.prototype.canvasWidth;
-	// Bullet.prototype.canvasHeight;
 
     if (collision(zombie)) {
         hero.src = "img/wiggum-zombiesm.png";
@@ -262,16 +216,6 @@ function main() {
 }
 // zombiePos.x+=1;
 
-// function update() {
-//     });
-//
-//     });
-// }
-//
-// function draw() {
-//     playerBullets.forEach(function(bullet) {
-//         bullet.draw();
-//     });
-// }
+
 
 main();
