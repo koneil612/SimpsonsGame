@@ -104,6 +104,7 @@ zombie.add = function() {
     screenZombies.push(zombie({}));
 };
 
+
 var screenZombies = [];
 function zombie(I) {
     var number = Math.round(Math.random()* 21);
@@ -255,6 +256,19 @@ function handleCollisions() {
 
  }
 
+  // function collision(a, b) {
+  //   if (a.x +32 < b.x){
+  //       return false;
+  //   } else if (b.x + 32 < a.x) {
+  //     return false;
+  // } else if (a.y + 32 < b.y) {
+  //     return false;
+  // } else if (b.y + 32 < a.y ) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
 function collision(heroPos, zombie) {
   if (heroPos.x +32 < zombie.x){
       return false;
@@ -300,10 +314,10 @@ function update() {
     handleCollisions();
 
 }
-var src = "img/locations/background.png"
+
 function draw() {
     var bgImage = new Image();
-    bgImage.src = src;
+    bgImage.src = "img/locations/school.png";
     context.drawImage(bgImage, 0, 0);
     context.drawImage(hero, heroPos.x, heroPos.y);
     heroBullets.forEach(function(bullet) {
@@ -318,7 +332,7 @@ function draw() {
 
 zombie.add();
 var addZombies = function() {
-    if(screenZombies.length === 4) clearInterval(timer);
+    if(screenZombies.length === 8) clearInterval(timer);
     zombie.add();
     console.log(screenZombies);
 };
@@ -367,7 +381,7 @@ function main() {
     }
 
 }
-function startgame() {
+function nextLevel() {
     clearInterval(timer);
     hero.src = "img/wiggum.png";
     heroPos = {
@@ -378,17 +392,11 @@ function startgame() {
         speed: .8,
         timeout: 25
     };
+    on = false;
     screenZombies = [];
     heroBullets = [];
     zombie.add();
     main();
     timer = setInterval(addZombies, 1 * 6000);
 }
-
-// function next() {
-//     src = "img/locations/school.png"
-//     context.clearRect(0,0,canvas.width, canvas.height)
-//     startgame();
-// }
-
 // main();

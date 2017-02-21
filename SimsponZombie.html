@@ -13,29 +13,46 @@
             <p><h1 id="after">The Simpson's </h1>    </p><p><h1 id="afterZ">Zombie</h1></p>
             <hr />
         </div>
-        <div>
-            <p>Timer: Pocket Change: Ammo:</p>
+        <div class="leftside">
+        <p>Timer: </p>
+        <p>Pocket Change: </p>
+        <p>Ammo: </p>
+
         </div>
         <div class="rightside">
-            <p>Stamina: Zombies Killed: Store:</p>
+            <p>Stamina: </p>
+            <p>Zombies Killed: </p>
+            <p>Store:</p>
         </div>
-        <div class="gamecanvas">
-            <canvas id="canvas">
-            </canvas>
+        <div id="status-area">
+            <button id="levelup" onClick="next()"> Next Level</button>
+        </div><br />
+        <div id="gamecanvas">
+            <button id="start" onClick="startgame()"> Start Game</button>
+            <canvas id="canvas"></canvas>
+        </div>
+        <div>
+
         </div>
     </body>
 
 
-<script src="game.js"></script>
+<script id="nextLevel" src="game.js"></script>
+<!-- <script id="nextlevel" src=""></script> -->
 <script>
+
 function hideLogo() {
     document.getElementById("logo").style.display = "none";
+    // document.getElementById("#gamecanvas").hide();
+
 }
+
+
 $(document).ready(function() {
-setTimeout("hideLogo()", 1499);
-   $('#afterZ').delay(1500).fadeIn(900);
-   $('#after').delay(1500).fadeIn(900);
+setTimeout("hideLogo()", 3000);
+   $('#afterZ').delay(3000).fadeIn(1500);
+   $('#after').delay(3000).fadeIn(1500);
 });
-</script>
+
 
 </html>
