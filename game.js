@@ -1,11 +1,11 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-canvas.width = 750;
-canvas.height = 800;
+canvas.width = 900;
+canvas.height = 710;
+
+var on = false; //toggle stuff
 
 var heroBullets = [];
-var on = false;
-
 function bullet(I) {
     I.active = true;
     I.yVelocity = 0;
@@ -56,8 +56,8 @@ var heroPos = {
 };
 
 hero.shoot = function() {
-    console.log("i'm shooting");
-    console.log(heroBullets);
+    // console.log("i'm shooting");
+    // console.log(heroBullets);
     var bulletPosition = this.midpoint();
 
     heroBullets.push(bullet({
@@ -73,6 +73,7 @@ hero.midpoint = function() {
         y: this.y + this.height/2
     };
 };
+
 
 var zombies = [
     'bartsm.png',
@@ -90,54 +91,106 @@ var zombies = [
     'moesm.png',
     'mrburnssm.png',
     'nelsonsm.png',
-    'ottossm.png',
+    'ottosm.png',
     'quimbysm.png',
     'revlovejoysm.png',
     'skinnersm.png',
     'snakesm.png',
     'williesm.png',
 ]
-var number = Math.round(Math.random()* 21);
 
-var zombie = new Image();
-zombie.src = "img/"+ zombies[number];
+// var zombie = new Image();
+// zombie.src = "img/"+ zombies[number];
+//
+// var zombiePos = {
+//     x: 50,
+//     y: 250,
+//     dirX: 0,
+//     dirY: 0,
+//     speed: .8,
+//     timeout: 25
 
-var zombiePos = {
-    x: 50,
-    y: 250,
-    dirX: 0,
-    dirY: 0,
-    speed: .8,
-    timeout: 25
+// };
 
+zombie.add = function() {
+    screenZombies.push(zombie({}));
 };
 
+
+var screenZombies = [];
+function zombie(I) {
+    var number = Math.round(Math.random()* 21);
+    I.active = true;
+    I.src = "img/" + zombies[number];
+    I.x = Math.round(Math.random()* 650);
+    I.y = Math.round(Math.random()* 700);
+    I.dirX = 0;
+    I.dirY = 0;
+    I.speed = .8;
+    I.timeout = 25;
+
+    var zImg = new Image();
+    zImg.src = I.src;
+
+    I.inBounds = function() {
+        return I.x >= 0 && I.x < 899 && I.y >= 0 && I.y <= canvas.height;
+
+    }
+    //     if (this.x > 899) {
+    //         this.dirX = 870;
+    //     } else if (this.x < 0) {
+    //         this.dirX = 5;
+    //     } else if (this.y > 709) {
+    //         this.dirY = 708;
+    //     } else if (this.y < 0) {
+    //         this.dirY = 5;
+    //     }
+    // }
+
+    I.draw = function() {
+        context.drawImage(zImg, this.x, this.y);
+    }
+
+    I.pos = function () {
+        this.x,
+        this.y,
+        this.dirX,
+        this.dirY,
+        this.speed,
+        this.timeout
+    }
+    I.moveRandom = function() {
+        this.timeout -= 1;
+        this.x += this.dirX * this.speed;
+        this.y += this.dirY * this.speed;
+        if (this.timeout <= 0) {
+            this.dirX = Math.floor(Math.random() * 3) - .9;
+            this.dirY = Math.floor(Math.random() * 3) - .9;
+            this.timeout = 25;
+            //   player.speed = Math.floor(Math.random() * 1) - 5;
+        }
+    }
+
+    I.update = function() {
+        I.active = I.active && I.inBounds();
+    };
+
+    return I;
+}
+
 function border(object) {
-    if (object.x > 800) {
-        object.x = 0;
+    if (object.x > 899) {
+        object.x = 880;
     } else if (object.x < 0) {
-        object.x = 510;
-    } else if (object.y > 720) {
-        object.y = 0;
+        object.x = 5;
+    } else if (object.y > 650) {
+        object.y = 600;
     } else if (object.y < 0) {
-        object.y = 200;
+        object.y = 5;
     }
+    // border(zombie);
 }
 
-function moveRandom(player) {
-    //change opponent's direction randomly
-    player.timeout -= 1;
-    player.x += player.dirX * player.speed;
-    player.y += player.dirY * player.speed;
-    if (player.timeout <= 0) {
-        player.dirX = Math.floor(Math.random() * 3) - .9;
-        player.dirY = Math.floor(Math.random() * 3) - .9;
-        player.timeout = 25;
-        //   player.speed = Math.floor(Math.random() * 1) - 5;
-    }
-    border(player);
-
-}
 function move(player) {
     //change opponent's direction randomly
     player.x += player.dirX * player.speed;
@@ -206,29 +259,63 @@ window.addEventListener('keydown', function(event) {
 // });
 
 function handleCollisions() {
-  heroBullets.forEach(function(bullet) {
-      if (collision(bullet, zombiePos)) {
-        console.log("you shot him!");
-        zombie = "";
-        bullet.active = false;
-      }
-    });
-    if (collision(heroPos, zombiePos)) {
-      console.log("you died SOB");
-      hero.src = "img/wiggum-zombiesm.png";
-      bullet.active = false;
-    }
+     heroBullets.forEach(function(bullet){
+         screenZombies.forEach(function(z){
+             if (shot(bullet, z)) {
+                 console.log("you shot him!");
+                 z.active = false;
+                 bullet.active = false;
+             };
+        });
+     });
+
+  screenZombies.forEach(function(zombie){
+      if (collision(heroPos, zombie)) {
+        //   console.log("you died SOB");
+          hero.src = "img/wiggum-zombiesm.png";
+          bullet.active = false;
+      };
+  });
+
+ }
+
+  // function collision(a, b) {
+  //   if (a.x +32 < b.x){
+  //       return false;
+  //   } else if (b.x + 32 < a.x) {
+  //     return false;
+  // } else if (a.y + 32 < b.y) {
+  //     return false;
+  // } else if (b.y + 32 < a.y ) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+function collision(heroPos, zombie) {
+  if (heroPos.x +32 < zombie.x){
+      return false;
+  } else if (zombie.x + 32 < heroPos.x) {
+    return false;
+  } else if (heroPos.y + 32 < zombie.y) {
+    return false;
+  } else if (zombie.y + 32 < heroPos.y ) {
+    return false;
   }
+  return true;
+}
 
-
-function collision(a, b) {
-    if (a.x +32 < b.x){
+function shot(bullet, z) {
+    // console.log("doing stuff");
+    // console.log(bullet.x, bullet.y);
+    // console.log(z.x, z.y);
+    if (bullet.x + 7 < z.x){
         return false;
-    } else if (b.x + 32 < a.x) {
+    } else if (z.x + 40 < bullet.x) {
       return false;
-  } else if (a.y + 32 < b.y) {
+  } else if (bullet.y + 7 < z.y) {
       return false;
-  } else if (b.y + 32 < a.y ) {
+  } else if (z .y + 40  < bullet.y ) {
       return false;
     }
     return true;
@@ -241,7 +328,17 @@ function update() {
     heroBullets = heroBullets.filter(function(b) {
        return b.active;
     });
+    screenZombies.forEach(function(zombie){
+        zombie.update()
+        zombie.moveRandom();
+        border(zombie);
+    });
+
+    screenZombies = screenZombies.filter(function(s){
+        return s.active
+    });
     handleCollisions();
+
 }
 
 function draw() {
@@ -249,15 +346,29 @@ function draw() {
     bgImage.src = "img/locations/background.png";
     context.drawImage(bgImage, 0, 0);
     context.drawImage(hero, heroPos.x, heroPos.y);
-    context.drawImage(zombie, zombiePos.x, zombiePos.y);
+    // context.drawImage(zombie, zombiePos.x, zombiePos.y);
     heroBullets.forEach(function(bullet) {
         bullet.draw()
     });
-}
+
+    // setTimeout(function(){zombie.add();}, 3000);
+
+    screenZombies.forEach(function(z) {
+        z.draw()
+    });
+};
+
+zombie.add();
+var addZombies = function() {
+    if(screenZombies.length === 4) clearInterval(timer);
+        zombie.add();
+        console.log(screenZombies);
+};
+var timer = setInterval(addZombies, 1 * 6000);
+
 function main() {
     draw();
     update();
-    moveRandom(zombiePos);
     move(heroPos);
 
     requestAnimationFrame(main);
