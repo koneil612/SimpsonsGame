@@ -1,3 +1,23 @@
+body {
+    background-color: yellow;
+    font-family: Akbar;
+}
+#after {
+    display: none;
+    text-decoration: line-through;
+    color: red;
+}
+#afterZ {
+    display: none;
+    color: red;
+    font-size: 44px;
+}
+.header {
+    text-align: center;
+    font-size: 22px;
+    color: black;
+}
+
 .gamecanvas {
     text-align: center;
 }

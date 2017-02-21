@@ -1,7 +1,7 @@
 class Zombie {
     constructor() {
     let x = Math.round(Math.random());
-    this.zombie = [
+    var zombies = [
         'img/bartsm.png',
         'img/apusm.png',
         'img/catsm.png',
@@ -9,8 +9,7 @@ class Zombie {
         'img/grandpasm.png',
         'img/homersm.png',
     ],
-    this.pos = {}
-    this.state = {
+    this.pos = {
             x: 50,
             y: 250,
             dirX: 0,
@@ -18,14 +17,17 @@ class Zombie {
             speed: .8,
             timeout: 25
         };
+
+    this.state = {
         image: this.zombie[x]
-    } zombie = new Image();
-    zombie.src = Math.floor(Math.random() * 2) - .9;["img/bartsm.png", "img/margesm.png"] ;
+    }
+
+}
 }
 
+var zombie = new Image();
+zombie.src = "img"+ Math.round(Math.random());
 
-var hero = new Image();
-hero.src = "img/wiggum.png";
 // hero.height = 32;
 // hero.width = 32;
 var heroPos = {

@@ -2,12 +2,26 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Simpson Zombies</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link href="static/zombie.css" rel="stylesheet">
     </head>
     <body>
-        <div class ="header">
-            <p><h1> Simpson Zombie Game</h1></p>
+        <div class="header">
+            <p><h1 id="logo"> The Simpson's</h1></p>
+            <p><h1 id="after">The Simpson's </h1>    </p><p><h1 id="afterZ">Zombie</h1></p>
+            <hr />
+        </div>
+        <div>
+            <p>Timer:</p>
+            <p>Pocket Change:</p>
+            <p>Ammo:</p>
+        </div>
+        <div class="rightside">
+            <p>Stanema:</p>
+            <p>Zombies Killed:</p>
+            <p>Store:</p>
         </div>
         <div class="gamecanvas">
             <canvas id="canvas">
@@ -17,5 +31,15 @@
 
 
 <script src="game.js"></script>
+<script>
+function hideLogo() {
+    document.getElementById("logo").style.display = "none";
+}
+$(document).ready(function() {
+setTimeout("hideLogo()", 1499);
+   $('#afterZ').delay(1500).fadeIn(900);
+   $('#after').delay(1500).fadeIn(900);
+});
+</script>
 
 </html>
