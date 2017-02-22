@@ -234,15 +234,20 @@ window.addEventListener('keydown', function(event) {
 //     }
 // });
 
+
+var sum = 0;
 function handleCollisions() {
      heroBullets.forEach(function(bullet){
          screenZombies.forEach(function(z){
              if (shot(bullet, z)) {
+                 sum +=10;
                  console.log("you shot him!");
                  z.active = false;
                  bullet.active = false;
              };
         });
+        console.log(sum)
+        return sum;
      });
 
   screenZombies.forEach(function(zombie){
@@ -383,7 +388,9 @@ function startgame() {
     zombie.add();
     main();
     timer = setInterval(addZombies, 1 * 6000);
+
 }
+
 
 // function next() {
 //     src = "img/locations/school.png"
