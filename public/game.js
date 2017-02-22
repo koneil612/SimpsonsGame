@@ -337,13 +337,16 @@ var addZombies = function() {
 var clock = 30;
 var clockb;
 var gameClock = function(){
-    console.log(clock);
     clock --;
     if (clock < 0) {
         gameOver = true;
         clearInterval(clockb);
     } else {
+<<<<<<< HEAD
         $('#timer').html(clock + " seconds.");
+=======
+        $('#timer').html(clock);
+>>>>>>> 49b8f0a85fb7f65693b94e6c51d7e956a3a5a94a
     }
 };
 // var gameClock = setInterval(function() {
@@ -356,7 +359,10 @@ var gameClock = function(){
 //         console.log(clock);
 //     }
 //     }, 1000);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 49b8f0a85fb7f65693b94e6c51d7e956a3a5a94a
 
 function main() {
     draw();
