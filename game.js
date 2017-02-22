@@ -246,9 +246,11 @@ function handleCollisions() {
                  bullet.active = false;
              };
         });
-        console.log(sum)
+        console.log(sum);
         return sum;
      });
+
+     $('#score').html(sum);
 
   screenZombies.forEach(function(zombie){
       if (collision(heroPos, zombie)) {
@@ -259,6 +261,8 @@ function handleCollisions() {
   });
 
  }
+
+
 
 function collision(heroPos, zombie) {
   if (heroPos.x +32 < zombie.x){
@@ -327,8 +331,17 @@ var addZombies = function() {
     zombie.add();
     console.log(screenZombies);
 };
-var timer;
-
+var clock = 30;
+var gameClock = setInterval(function() {
+    clock --;
+    if (clock < 0) {
+        gameOver = true;
+        clearInterval(clock);
+    } else {
+        $('#timer').innerHTML = clock.toString() + " seconds.";
+    }
+    }, 1000);
+    console.log(gameClock);
 
 function main() {
     draw();
@@ -388,7 +401,7 @@ function startgame() {
     zombie.add();
     main();
     timer = setInterval(addZombies, 1 * 6000);
-
+    clock = setInterval(gameClock);
 }
 
 
