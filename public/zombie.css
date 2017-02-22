@@ -36,15 +36,36 @@ body {
     z-index: 1;
 }
 
-#canvas {
+#container {
+    width: 900px;
+    height: 710px;
+    margin: 0 auto;
+    position: relative;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#canvas1 {
     text-align: center;
-    z-index: -1;
+    z-index: 1;
     width: 895px;
     height: 605px;
 }
 
+button {
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    position: absolute;
+    z-index: 5;
+}
+
 #start {
-    z-index: 1;
+    left: 25px;
 }
 
 #levelup {

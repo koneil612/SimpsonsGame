@@ -1,6 +1,6 @@
 
 
-var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("canvas1");
 var context = canvas.getContext("2d");
 canvas.width = 900;
 canvas.height = 710;
@@ -421,6 +421,7 @@ function main() {
             text: 'Sucks to suck!',
             how: 'append'
             });
+            $('#start').show();
     } else {
             requestAnimationFrame(main);
     }

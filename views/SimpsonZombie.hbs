@@ -22,14 +22,13 @@
         </div>
         <div id="status-area">
             <button id="levelup" onClick="next()"> Next Level</button>
-        </div><br />
-        <div id="gamecanvas">
-            <button id="start" onClick="startgame()"> Start Game</button>
-            <canvas id="canvas"></canvas>
         </div>
-        <div>
+        <div id="container">
+                <button id="start" onClick="startgame()"> Start Game
+                </button>
+                <canvas id="canvas1"></canvas>
+            </div>
 
-        </div>
     </body>
 
 
@@ -45,6 +44,8 @@ function hideLogo() {
 
 
 $(document).ready(function() {
+ $('#start').click(function() {$(this).hide();});
+
 setTimeout("hideLogo()", 3000);
    $('#afterZ').delay(3000).fadeIn(1500);
    $('#after').delay(3000).fadeIn(1500);
