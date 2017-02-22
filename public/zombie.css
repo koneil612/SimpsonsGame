@@ -34,6 +34,8 @@ body {
 #gamecanvas {
     text-align: center;
     z-index: -1;
+    width: 895px;
+    height: 605px;
 }
 
 #start {

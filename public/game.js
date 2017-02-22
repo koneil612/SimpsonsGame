@@ -111,8 +111,8 @@ function zombie(I) {
     var number = Math.round(Math.random()* 21);
     I.active = true;
     I.src = "/img/" + zombies[number];
-    I.x = Math.round(Math.random()* 300);
-    I.y = Math.round(Math.random()* 200);
+    I.x = Math.round(Math.random()* 800);
+    I.y = Math.round(Math.random()* 700);
     I.dirX = 0;
     I.dirY = 0;
     I.speed = .8;
@@ -343,6 +343,7 @@ var gameClock = function(){
         gameOver = true;
         clearInterval(clockb);
     } else {
+<<<<<<< Updated upstream
         $('#timer').html(clock + " seconds.");
     }
 };
@@ -356,6 +357,12 @@ var gameClock = function(){
 //         console.log(clock);
 //     }
 //     }, 1000);
+=======
+        $('#timer').HTML = clock.toString() + " seconds.";
+        console.log(clock);
+    }
+}, 1000);
+>>>>>>> Stashed changes
 
 function main() {
     draw();
@@ -400,6 +407,7 @@ function main() {
 
 }
 function startgame() {
+    clock = setInterval(gameClock);
     clearInterval(timer);
     hero.src = "img/wiggum.png";
     heroPos = {
@@ -415,7 +423,10 @@ function startgame() {
     zombie.add();
     main();
     timer = setInterval(addZombies, 1 * 6000);
+<<<<<<< Updated upstream
     clockb = setInterval(gameClock, 1000);
+=======
+>>>>>>> Stashed changes
 }
 
 
