@@ -208,14 +208,18 @@ window.addEventListener('keydown', function(event) {
     }
     if (key == 13) { //enter (flip)
         event.preventDefault();
-        if (on) {
-        toggleOff();
-        } else
-        toggleOn();
+        if (!gameOver){
+            if (on) {
+                toggleOff();
+            } else
+            toggleOn();
+        }
     }
     if (key == 32) { //spacebar (shoot gun)
         event.preventDefault();
-        hero.shoot();
+        if (gameOver === false) {
+            hero.shoot();
+        }
     }
     border(hero);
 });
@@ -256,9 +260,11 @@ function handleCollisions() {
 
   screenZombies.forEach(function(zombie){
       if (collision(heroPos, zombie)) {
-        //   console.log("you died SOB");
           hero.src = "img/wiggum-zombiesm.png";
           bullet.active = false;
+          clearInterval(timer);
+          gameOver = true;
+
       };
   });
 
@@ -291,6 +297,9 @@ function shot(bullet, z) {
     }
     return true;
   }
+
+
+
 
 function update() {
     heroBullets.forEach(function(bullet) {
@@ -376,7 +385,7 @@ function main() {
         $.fn.flash_message = function(options) {
             options = $.extend({
                 text: 'Done',
-                time: 1000,
+                time: 3000,
                 how: 'before',
                 class_name: ''
             }, options);
@@ -401,6 +410,35 @@ function main() {
             how: 'append'
             });
 
+    } else if (gameOver) {
+        (function($) {
+
+        $.fn.flash_message = function(options) {
+            options = $.extend({
+                text: 'Done',
+                time: 3000,
+                how: 'before',
+                class_name: ''
+            }, options);
+
+            return $(this).each(function() {
+                if ($(this).parent().find('flash_message').get(0) )
+                return;
+
+                var message = $('<span />', {'class': 'flash_message' + options.class_name, text: options.text}).hide().fadeIn('fast');
+
+                $(this)[options.how](message);
+
+                message.delay(options.time).fadeOut('very slow', function() {
+                    $(this).remove();
+                });
+            });
+        };
+        })(jQuery);
+            $('#status-area').flash_message({
+            text: 'Sucks to suck!',
+            how: 'append'
+            });
     } else {
             requestAnimationFrame(main);
     }
@@ -417,6 +455,7 @@ function startgame() {
         speed: .8,
         timeout: 25
     };
+    sum = 0;
     screenZombies = [];
     heroBullets = [];
     zombie.add();
