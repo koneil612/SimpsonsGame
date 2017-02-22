@@ -354,16 +354,6 @@ var gameClock = function(){
         $('#timer').html(clock);
     }
 };
-// var gameClock = setInterval(function() {
-//     clock --;
-//     if (clock < 0) {
-//         gameOver = true;
-//         clearInterval(clock);
-//     } else {
-//         $('#timer').innerHTML = clock.toString() + " seconds.";
-//         console.log(clock);
-//     }
-//     }, 1000);
 
 function main() {
     draw();
