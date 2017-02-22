@@ -333,17 +333,29 @@ var addZombies = function() {
     zombie.add();
     console.log(screenZombies);
 };
+
 var clock = 30;
-var gameClock = setInterval(function() {
+var clockb;
+var gameClock = function(){
+    console.log(clock);
     clock --;
     if (clock < 0) {
         gameOver = true;
-        clearInterval(clock);
+        clearInterval(clockb);
     } else {
-        $('#timer').innerHTML = clock.toString() + " seconds.";
+        $('#timer').html(clock + " seconds.");
     }
-    }, 1000);
-    console.log(gameClock);
+};
+// var gameClock = setInterval(function() {
+//     clock --;
+//     if (clock < 0) {
+//         gameOver = true;
+//         clearInterval(clock);
+//     } else {
+//         $('#timer').innerHTML = clock.toString() + " seconds.";
+//         console.log(clock);
+//     }
+//     }, 1000);
 
 function main() {
     draw();
@@ -403,7 +415,7 @@ function startgame() {
     zombie.add();
     main();
     timer = setInterval(addZombies, 1 * 6000);
-    clock = setInterval(gameClock);
+    clockb = setInterval(gameClock, 1000);
 }
 
 
