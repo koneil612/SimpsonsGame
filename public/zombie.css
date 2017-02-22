@@ -1,6 +1,6 @@
-@@font-face {
+@font-face {
     font-family: 'Akbar';
-    src:url('public/font/akbar.ttf');
+    src:url('font/akbar.ttf') format('truetype');
 }
 
 body {
