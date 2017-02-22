@@ -36,7 +36,7 @@ body {
     z-index: 1;
 }
 
-#gamecanvas {
+#canvas {
     text-align: center;
     z-index: -1;
     width: 895px;
