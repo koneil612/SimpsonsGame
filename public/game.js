@@ -107,7 +107,7 @@ zombie.add = function() {
     // var tmpZ = zombie({});
 
     screenZombies.push(zombie({}));
-    console.log(screenZombies);
+    // console.log(screenZombies);
 };
 
 var screenZombies = [];
@@ -167,6 +167,19 @@ var screenZombies = [];
 //     });
 //     // return I;
 // }
+function getLevel(){
+    level ++;
+    $.ajax({
+        url: "/get_level",
+        type: 'post',
+        dataType: 'json',
+        async: false,
+        data: {
+            stage:level
+        }
+    });
+}
+
 function zombie(I) {
     var img;
     $.ajax({
@@ -402,7 +415,7 @@ function draw() {
     });
 
     screenZombies.forEach(function(z) {
-        console.log(z);
+        // console.log(z);
         z.draw()
     });
 };
@@ -501,7 +514,8 @@ function main() {
 
 }
 function startgame() {
-    level ++;
+    getLevel();
+    // console.log(level);
     clearInterval(timer);
     on = false;
     hero.src = "img/wiggum.png";

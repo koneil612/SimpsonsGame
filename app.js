@@ -28,12 +28,24 @@ app.get('/get_zombie', function(req, res) {
        var zombies;
        var number = Math.round(Math.random()* results.rows.length);
     //    zombies = results.rows;
-       console.log(results.rows);
+    //    console.log(results.rows);
        res.json(results.rows[number].img_path); // assumes 'results.rows' can be serialized to JSON
 
      });
 })
 
+app.post('/get_level', function(req,res) {
+    var level;
+    console.log();
+    client.query("SELECT * FROM levels WHERE level = level", function(err, result) {
+        if (err) {
+            throw err;
+        }
+        // var levels;
+        // console.log(result.rows);
+        res.send(result.rows);
+    })
+})
 
 app.listen(3000, function() {
     console.log("3000!");
