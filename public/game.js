@@ -79,29 +79,7 @@ hero.midpoint = function() {
 };
 
 
-// var zombies = [
-//     'bartsm.png',
-//     'apusm.png',
-//     'catsm.png',
-//     'duffmansm.png',
-//     'grandpasm.png',
-//     'homersm.png',
-//     'flanderssm.png',
-//     'krustysm.png',
-//     'lisasm.png',
-//     'margesm.png',
-//     'martinsm.png',
-//     'milhousesm.png',
-//     'moesm.png',
-//     'mrburnssm.png',
-//     'nelsonsm.png',
-//     'ottosm.png',
-//     'quimbysm.png',
-//     'revlovejoysm.png',
-//     'skinnersm.png',
-//     'snakesm.png',
-//     'williesm.png',
-// ]
+
 
 zombie.add = function() {
     // var tmpZ = zombie({});
@@ -114,59 +92,6 @@ var screenZombies = [];
 
 
 
-// function zombie(I) {
-//     $.get("/get_zombie", function(results) {
-//         var number = Math.round(Math.random()* 21);
-//         I.active = true;
-//         I.src = "/img/" + results;
-//         console.log(I.src);
-//         I.x = Math.round(Math.random()* 800);
-//         I.y = Math.round(Math.random()* 700);
-//         I.dirX = 0;
-//         I.dirY = 0;
-//         I.speed = .8;
-//         I.timeout = 25;
-//
-//         var zImg = new Image();
-//         zImg.src = I.src;
-//
-//         I.inBounds = function() {
-//             return I.x >= 0 && I.x < 899 && I.y >= 0 && I.y <= canvas.height;
-//         }
-//
-//
-//         I.draw = function() {
-//             context.drawImage(zImg, this.x, this.y);
-//         }
-//
-//         I.pos = function () {
-//             this.x,
-//             this.y,
-//             this.dirX,
-//             this.dirY,
-//             this.speed,
-//             this.timeout
-//         }
-//         I.moveRandom = function() {
-//             this.timeout -= 1;
-//             this.x += this.dirX * this.speed;
-//             this.y += this.dirY * this.speed;
-//             if (this.timeout <= 0) {
-//                 this.dirX = Math.floor(Math.random() * 3) - .9;
-//                 this.dirY = Math.floor(Math.random() * 3) - .9;
-//                 this.timeout = 25;
-//                 //   player.speed = Math.floor(Math.random() * 1) - 5;
-//             }
-//         }
-//
-//         I.update = function() {
-//             I.active = I.active && I.inBounds();
-//         };
-//
-//         return I;
-//     });
-//     // return I;
-// }
 function getLevel(){
     level ++;
     $.ajax({
@@ -191,7 +116,6 @@ function zombie(I) {
             img = data;
         }
      });
-    // var number = Math.round(Math.random()* 21);
     I.active = true;
     I.src = "/img/" + img;
     I.x = Math.round(Math.random()* 800);
@@ -307,21 +231,6 @@ window.addEventListener('keydown', function(event) {
     border(hero);
 });
 
-// window.addEventListener('keyup', function(event) {
-//     var key = event.keyCode;
-//     if (key == 37) { //left
-//         heroPos.dirX = 0;
-//     }
-//     if (key == 39) { //right
-//         heroPos.dirX = 0;
-//     }
-//     if (key == 38) { //up
-//         heroPos.dirY = 0;
-//     }
-//     if (key == 40) { //down
-//         heroPos.dirY = 0;
-//     }
-// });
 
 
 var sum = 0;
