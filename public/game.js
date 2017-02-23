@@ -447,9 +447,27 @@ function startgame() {
 }
 
 
-// function next() {
-//     level ++;
-//     startgame();
-// }
+function next() {
+    getLevel();
+    // console.log(level);
+    clearInterval(timer);
+    on = false;
+    hero.src = "img/wiggum.png";
+    heroPos = {
+        x: 200,
+        y: 100,
+        dirX: 0,
+        dirY: 0,
+        speed: 2,
+        timeout: 25
+    };
+    screenZombies = [];
+    heroBullets = [];
+    zombie.add();
+    main();
+    timer = setInterval(addZombies, 1 * 6000);
+    clock = 30;
+    clockb = setInterval(gameClock, 1000);
+}
 
 // main();
