@@ -14,25 +14,28 @@ var client = new pg.Client(connectionString);
 client.connect();
 
 app.get('/', function(req, res) {
-    var x = 1000;
 
-while (x > 0) {
-    x = x - 1;
-}
-
-var query = client.query("SELECT * FROM levels");
+// var query = client.query("SELECT * FROM levels");
 //fired after last row is emitted
+ client.query("SELECT * FROM zombies", function(err, results) {
+    if (err) {
+        throw err;
+    }
+    console.log(results.rows);
+    // res.send(results.rows); // assumes 'results.rows' can be serialized to JSON
+  });
 
-query.on('row', function(row) {
-    console.log(row);
-});
+// query.on('row', function(row) {
+//     console.log(row);
 
-query.on('end', function() {
-    client.end();
-});
     res.render('SimpsonZombie.hbs')
 });
+
 
 app.listen(3000, function() {
     console.log("3000!");
 });
+
+// query.on('end', function() {
+//     client.end();
+// });
