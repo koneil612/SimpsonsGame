@@ -6,6 +6,7 @@ canvas.width = 900;
 canvas.height = 710;
 
 var on = false; //toggle stuff
+var level = 0;
 gameOver = false;
 
 var heroBullets = [];
@@ -54,7 +55,7 @@ var heroPos = {
     y: 100,
     dirX: 0,
     dirY: 0,
-    speed: .8,
+    speed: 2,
     timeout: 25
 };
 
@@ -78,39 +79,108 @@ hero.midpoint = function() {
 };
 
 
-var zombies = [
-    'bartsm.png',
-    'apusm.png',
-    'catsm.png',
-    'duffmansm.png',
-    'grandpasm.png',
-    'homersm.png',
-    'flanderssm.png',
-    'krustysm.png',
-    'lisasm.png',
-    'margesm.png',
-    'martinsm.png',
-    'milhousesm.png',
-    'moesm.png',
-    'mrburnssm.png',
-    'nelsonsm.png',
-    'ottosm.png',
-    'quimbysm.png',
-    'revlovejoysm.png',
-    'skinnersm.png',
-    'snakesm.png',
-    'williesm.png',
-]
+// var zombies = [
+//     'bartsm.png',
+//     'apusm.png',
+//     'catsm.png',
+//     'duffmansm.png',
+//     'grandpasm.png',
+//     'homersm.png',
+//     'flanderssm.png',
+//     'krustysm.png',
+//     'lisasm.png',
+//     'margesm.png',
+//     'martinsm.png',
+//     'milhousesm.png',
+//     'moesm.png',
+//     'mrburnssm.png',
+//     'nelsonsm.png',
+//     'ottosm.png',
+//     'quimbysm.png',
+//     'revlovejoysm.png',
+//     'skinnersm.png',
+//     'snakesm.png',
+//     'williesm.png',
+// ]
 
 zombie.add = function() {
+    // var tmpZ = zombie({});
+
     screenZombies.push(zombie({}));
+    console.log(screenZombies);
 };
 
 var screenZombies = [];
+
+
+
+// function zombie(I) {
+//     $.get("/get_zombie", function(results) {
+//         var number = Math.round(Math.random()* 21);
+//         I.active = true;
+//         I.src = "/img/" + results;
+//         console.log(I.src);
+//         I.x = Math.round(Math.random()* 800);
+//         I.y = Math.round(Math.random()* 700);
+//         I.dirX = 0;
+//         I.dirY = 0;
+//         I.speed = .8;
+//         I.timeout = 25;
+//
+//         var zImg = new Image();
+//         zImg.src = I.src;
+//
+//         I.inBounds = function() {
+//             return I.x >= 0 && I.x < 899 && I.y >= 0 && I.y <= canvas.height;
+//         }
+//
+//
+//         I.draw = function() {
+//             context.drawImage(zImg, this.x, this.y);
+//         }
+//
+//         I.pos = function () {
+//             this.x,
+//             this.y,
+//             this.dirX,
+//             this.dirY,
+//             this.speed,
+//             this.timeout
+//         }
+//         I.moveRandom = function() {
+//             this.timeout -= 1;
+//             this.x += this.dirX * this.speed;
+//             this.y += this.dirY * this.speed;
+//             if (this.timeout <= 0) {
+//                 this.dirX = Math.floor(Math.random() * 3) - .9;
+//                 this.dirY = Math.floor(Math.random() * 3) - .9;
+//                 this.timeout = 25;
+//                 //   player.speed = Math.floor(Math.random() * 1) - 5;
+//             }
+//         }
+//
+//         I.update = function() {
+//             I.active = I.active && I.inBounds();
+//         };
+//
+//         return I;
+//     });
+//     // return I;
+// }
 function zombie(I) {
-    var number = Math.round(Math.random()* 21);
+    var img;
+    $.ajax({
+        url: "/get_zombie",
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            img = data;
+        }
+     });
+    // var number = Math.round(Math.random()* 21);
     I.active = true;
-    I.src = "/img/" + zombies[number];
+    I.src = "/img/" + img;
     I.x = Math.round(Math.random()* 800);
     I.y = Math.round(Math.random()* 700);
     I.dirX = 0;
@@ -261,9 +331,10 @@ function handleCollisions() {
   screenZombies.forEach(function(zombie){
       if (collision(heroPos, zombie)) {
           hero.src = "img/wiggum-zombiesm.png";
+          gameOver = true;
           bullet.active = false;
           clearInterval(timer);
-          gameOver = true;
+          clearInterval(clockb);
 
       };
   });
@@ -331,6 +402,7 @@ function draw() {
     });
 
     screenZombies.forEach(function(z) {
+        console.log(z);
         z.draw()
     });
 };
@@ -362,6 +434,7 @@ function main() {
 
     if (screenZombies.length === 0) {
         clearInterval(timer);
+        clearInterval(clockb);
         (function($) {
 
         $.fn.flash_message = function(options) {
@@ -428,14 +501,16 @@ function main() {
 
 }
 function startgame() {
+    level ++;
     clearInterval(timer);
+    on = false;
     hero.src = "img/wiggum.png";
     heroPos = {
         x: 200,
         y: 100,
         dirX: 0,
         dirY: 0,
-        speed: .8,
+        speed: 2,
         timeout: 25
     };
     sum = 0;
@@ -444,13 +519,13 @@ function startgame() {
     zombie.add();
     main();
     timer = setInterval(addZombies, 1 * 6000);
+    clock = 30;
     clockb = setInterval(gameClock, 1000);
 }
 
 
 // function next() {
-//     src = "img/locations/school.png"
-//     context.clearRect(0,0,canvas.width, canvas.height)
+//     level ++;
 //     startgame();
 // }
 
