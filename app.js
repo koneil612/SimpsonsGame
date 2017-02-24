@@ -22,28 +22,50 @@ res.render('SimpsonZombie.hbs')
 });
 
 app.get('/get_zombie', function(req, res) {
+    //console.log(req);
+    var level = req.query.level;
     client.query("SELECT * FROM zombies", function(err, results) {
        if (err) {
            throw err;
        }
        var zombies;
-       var number = Math.round(Math.random()* results.rows.length);
-    //    console.log(results.rows);
-       res.json(results.rows[number].img_path); // assumes 'results.rows' can be serialized to JSON
+       var number = Math.round(Math.random()* results.rows.length-1);
+       console.log("random number is " + number);
+       var img = results.rows[number].img_path;
+       console.log("req level is "+level);
+       client.query("SELECT * FROM levels WHERE level =" + level, function(err, results) {
+           console.log("level info:");
+        //    console.log(results);
+           if (err) {
+               throw err;
+           }
+           var data = {
+                img:img,
+                speed:results.rows[0].speed
+           };
+           res.json(data); // assumes 'results.rows' can be serialized to JSON
+       });
+
 
      });
 });
 
 // TODO: not sure if I'm not sending the data correctly, or not calling it correctly
-app.post('/set_level', function(req,res) {
-    var level = req.body.stage;
-    console.log(level);
+app.get('/set_level', function(req,res) {
+    var level = req.query.stage;
+    // console.log(res);
     client.query("SELECT * FROM levels WHERE level =" + level, function(err, result) {
+        // console.log(result);
         if (err) {
             throw err;
         }
-        // console.log(result.rows);
-        res.json(result.rows);
+        var data = {
+            image: result.rows[0].background,
+            clock: result.rows[0].timer,
+            zAmount: result.rows[0].amount
+        }
+        console.log(data);
+        res.json(data);
     });
 });
 

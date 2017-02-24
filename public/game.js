@@ -4,7 +4,7 @@ canvas.width = 900;
 canvas.height = 710;
 
 var on = false; //toggle stuff
-var level = 0;
+var level = 1;
 gameOver = false;
 
 var heroBullets = [];
@@ -87,15 +87,20 @@ var screenZombies = [];
 
 // TODO: can't get this working.
 // ** Do we want to add an IF here? IF next level is clicked then go to level++?
+var image;
+var zAmount;
 function setLevel(){
-    var data = {"stage": level}
     $.ajax({
         url: "/set_level",
-        type: 'POST',
+        type: 'get',
         dataType: 'json',
-        data: data
+        data: {stage: level},
+        success: function(data) {
+            image = data.image;
+            clock = data.clock;
+            zAmount = data.zAmount;
+        }
 });
-console.log(data);
 }
 // } else start the game normally?
 // }
@@ -109,27 +114,34 @@ function zombie(I) {
         url: "/get_zombie",
         type: 'get',
         dataType: 'json',
+        data:{
+            level:level
+        },
         async: false,
         success: function(data) {
-            img = data;
+            img = data.img;
+            speed = data.speed;
         }
      });
-     $.ajax({
-         url: "/set_level",
-         type: 'get',
-         dataType: 'json',
-         async:false,
-         success: function(data){
-             speed = data.speed
-         }
-     });
+    //  $.ajax({
+    //      url: "/set_level",
+    //      type: 'post',
+    //      dataType: 'json',
+    //      data:{
+    //          stage:level
+    //      },
+    //      async:false,
+    //      success: function(data){
+    //          speed = data.speed
+    //      }
+    //  });
     I.active = true;
     I.src = "/img/" + img;
     I.x = Math.round(Math.random()* 800);
     I.y = Math.round(Math.random()* 700);
     I.dirX = 0;
     I.dirY = 0;
-    I.speed = .8;
+    I.speed = speed;
     I.timeout = 25;
 
     var zImg = new Image();
@@ -315,8 +327,8 @@ function update() {
     handleCollisions();
 
 }
-var src = "img/locations/background.png"
 function draw() {
+    var src = "img/locations/" + image;
     var bgImage = new Image();
     bgImage.src = src;
     context.drawImage(bgImage, 0, 0);
@@ -334,12 +346,12 @@ function draw() {
 
 zombie.add();
 var addZombies = function() {
-    if(screenZombies.length === 4) clearInterval(timer);
+    if(screenZombies.length === zAmount) clearInterval(timer);
     zombie.add();
     console.log(screenZombies);
 };
 
-var clock = 30;
+var clock;
 var clockb;
 var gameClock = function(){
     clock --;
@@ -423,7 +435,7 @@ function main() {
 
 }
 function startgame() {
-    level ++;
+    // console.log(src);
     setLevel();
     // console.log(level);
     clearInterval(timer);
@@ -443,14 +455,13 @@ function startgame() {
     zombie.add();
     main();
     timer = setInterval(addZombies, 1 * 6000);
-    clock = 30;
+    clock;
     clockb = setInterval(gameClock, 1000);
 }
 
 // FIXME: buttons stack ***************--- i stacked them good sir. but as we are aware it's levling up. super lame.
 function next() {
     level ++;
-    // console.log(level);
     clearInterval(timer);
     on = false;
     hero.src = "img/wiggum.png";
@@ -468,8 +479,9 @@ function next() {
     setLevel();
     main();
     timer = setInterval(addZombies, 1 * 6000);
-    clock = 30;
+    clock;
     clockb = setInterval(gameClock, 1000);
+
 }
 
 // main();
