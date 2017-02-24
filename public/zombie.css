@@ -21,33 +21,33 @@ body {
 }
 
 #logo {
-    color: black;
+    color: #0e0303;
 }
 
 #after {
     visibility: hidden;
     text-decoration: line-through;
-    color: red;
+    color: #d10808;
     text-shadow:
-    -1px -1px 0 black,
-    1px -1px 0 black,
-    -1px 1px 0 black,
-    1px 1px 0 black;
+    -1px -1px 0 #0e0303,
+    1px -1px 0 #0e0303,
+    -1px 1px 0 #0e0303,
+    1px 1px 0 #0e0303;
 }
 #afterZ {
     visibility: hidden;
     text-shadow:
-    -1px -1px 0 black,
-    1px -1px 0 black,
-    -1px 1px 0 black,
-    1px 1px 0 black;
-    color: red;
+    -1px -1px 0 #0e0303,
+    1px -1px 0 #0e0303,
+    -1px 1px 0 #0e0303,
+    1px 1px 0 #0e0303;
+    color: #d10808;
     font-size: 44px;
 }
 .header {
     text-align: center;
     font-size: 22px;
-    color: black;
+    color: #0e0303;
 }
 
 .leftside {
@@ -98,7 +98,7 @@ button {
     width: 200px;
     height: 50px;
     background-color: #0000ff;
-    color: white;
+    color: #eee1e1;
     border: none;
     border-radius: 30px;
     font-size: 20px;
