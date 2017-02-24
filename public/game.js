@@ -104,6 +104,7 @@ console.log(data);
 // images from postgres
 function zombie(I) {
     var img;
+    var speed;
     $.ajax({
         url: "/get_zombie",
         type: 'get',
@@ -112,6 +113,15 @@ function zombie(I) {
         success: function(data) {
             img = data;
         }
+     });
+     $.ajax({
+         url: "/set_level",
+         type: 'get',
+         dataType: 'json',
+         async:false,
+         success: function(data){
+             speed = data.speed
+         }
      });
     I.active = true;
     I.src = "/img/" + img;
@@ -414,6 +424,7 @@ function main() {
 }
 function startgame() {
     level ++;
+    setLevel();
     // console.log(level);
     clearInterval(timer);
     on = false;

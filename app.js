@@ -7,6 +7,7 @@ const connectionString = process.env.DATABASE_URL || 'postgres://postgres:rocket
 const app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use(express.static("public"));
 app.set('view engine', 'hbs');
 
@@ -31,18 +32,19 @@ app.get('/get_zombie', function(req, res) {
        res.json(results.rows[number].img_path); // assumes 'results.rows' can be serialized to JSON
 
      });
-})
+});
 
 // TODO: not sure if I'm not sending the data correctly, or not calling it correctly
 app.post('/set_level', function(req,res) {
-    // var level;
-    console.log(req);
-    // client.query("SELECT * FROM levels WHERE level = level", function(err, result) {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     res.send(result.rows);
-    // })
+    var level = req.body.stage;
+    console.log(level);
+    client.query("SELECT * FROM levels WHERE level =" + level, function(err, result) {
+        if (err) {
+            throw err;
+        }
+        // console.log(result.rows);
+        res.json(result.rows);
+    });
 });
 
 app.listen(3000, function() {
