@@ -85,8 +85,10 @@ zombie.add = function() {
 var screenZombies = [];
 
 
-// TODO: can't get this working.
+// DONE ┌(ㆆ㉨ㆆ)ʃ
 // ** Do we want to add an IF here? IF next level is clicked then go to level++?
+// NO, KRISTINE! (╯°□°）╯︵ ┻━┻
+//AJAX request for the level data
 var image;
 var zAmount;
 function getLevel(){
@@ -123,18 +125,7 @@ function zombie(I) {
             speed = data.speed;
         }
      });
-    //  $.ajax({
-    //      url: "/set_level",
-    //      type: 'post',
-    //      dataType: 'json',
-    //      data:{
-    //          stage:level
-    //      },
-    //      async:false,
-    //      success: function(data){
-    //          speed = data.speed
-    //      }
-    //  });
+
     I.active = true;
     I.src = "/img/" + img;
     I.x = Math.round(Math.random()* 800);

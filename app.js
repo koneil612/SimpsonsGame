@@ -15,8 +15,7 @@ var client = new pg.Client(connectionString);
 client.connect();
 
 app.get('/', function(req, res) {
-
-
+    // ヽ(´ー｀)ノ
 res.render('SimpsonZombie.hbs')
 
 });
@@ -50,7 +49,7 @@ app.get('/get_zombie', function(req, res) {
      });
 });
 
-// TODO: not sure if I'm not sending the data correctly, or not calling it correctly
+// DONE ヽ(´▽`)/
 app.get('/get_level', function(req,res) {
     var level = req.query.stage;
     // console.log(res);
@@ -73,6 +72,4 @@ app.listen(3000, function() {
     console.log("3000!");
 });
 
-// query.on('end', function() {
-//     client.end();
-// });
+// I don't even know why I added this
