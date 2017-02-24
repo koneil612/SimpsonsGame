@@ -14,11 +14,23 @@ app.set('view engine', 'hbs');
 var client = new pg.Client(connectionString);
 client.connect();
 
-app.get('/', function(req, res) {
+app.get('/game', function(req, res) {
     // ヽ(´ー｀)ノ
 res.render('SimpsonZombie.hbs')
 
 });
+
+app.get('/', function(req, res) {
+    res.render('home.hbs')
+});
+
+app.get('/highscores', function(req, res) {
+    res.render('scores.hbs')
+})
+
+app.post('/signin', function(req, res){
+    res.redirect('/game')
+})
 
 app.get('/get_zombie', function(req, res) {
     //console.log(req);

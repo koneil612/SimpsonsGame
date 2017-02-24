@@ -120,3 +120,21 @@ button {
     top: 75px;
     display: none;
 }
+
+/* Home page */
+.signin {
+    margin-top: 50px;
+    font-size: 30px;
+    text-align: center;
+}
+.scores {
+    margin-top: 50px;
+    margin-left: 400px;
+    font-size: 30px;
+}
+.second {
+    padding-left: 100px;
+}
+.move {
+    padding-top: 50px;
+}
