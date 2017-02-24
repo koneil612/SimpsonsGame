@@ -51,7 +51,7 @@ app.get('/get_zombie', function(req, res) {
 });
 
 // TODO: not sure if I'm not sending the data correctly, or not calling it correctly
-app.get('/set_level', function(req,res) {
+app.get('/get_level', function(req,res) {
     var level = req.query.stage;
     // console.log(res);
     client.query("SELECT * FROM levels WHERE level =" + level, function(err, result) {

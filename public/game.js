@@ -89,9 +89,9 @@ var screenZombies = [];
 // ** Do we want to add an IF here? IF next level is clicked then go to level++?
 var image;
 var zAmount;
-function setLevel(){
+function getLevel(){
     $.ajax({
-        url: "/set_level",
+        url: "/get_level",
         type: 'get',
         dataType: 'json',
         data: {stage: level},
@@ -436,7 +436,7 @@ function main() {
 }
 function startgame() {
     // console.log(src);
-    setLevel();
+    getLevel();
     // console.log(level);
     clearInterval(timer);
     on = false;
@@ -476,7 +476,7 @@ function next() {
     screenZombies = [];
     heroBullets = [];
     zombie.add();
-    setLevel();
+    getLevel();
     main();
     timer = setInterval(addZombies, 1 * 6000);
     clock;
