@@ -1,5 +1,3 @@
-
-
 var canvas = document.getElementById("canvas1");
 var context = canvas.getContext("2d");
 canvas.width = 900;
@@ -91,7 +89,7 @@ zombie.add = function() {
 var screenZombies = [];
 
 
-
+// TODO: can't get this working.
 function getLevel(){
     level ++;
     $.ajax({
@@ -105,6 +103,8 @@ function getLevel(){
     });
 }
 
+// creating our zombie using an ajax request pulling the
+// images from postgres
 function zombie(I) {
     var img;
     $.ajax({
@@ -446,7 +446,7 @@ function startgame() {
     clockb = setInterval(gameClock, 1000);
 }
 
-
+// FIXME: buttons stack
 function next() {
     getLevel();
     // console.log(level);
