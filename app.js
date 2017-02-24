@@ -27,13 +27,13 @@ app.get('/get_zombie', function(req, res) {
        }
        var zombies;
        var number = Math.round(Math.random()* results.rows.length);
-    //    zombies = results.rows;
-    //    console.log(results.rows);
+       console.log(results.rows);
        res.json(results.rows[number].img_path); // assumes 'results.rows' can be serialized to JSON
 
      });
 })
 
+// TODO: not sure if I'm not sending the data correctly, or not calling it correctly
 app.post('/get_level', function(req,res) {
     var level;
     console.log();
@@ -41,8 +41,6 @@ app.post('/get_level', function(req,res) {
         if (err) {
             throw err;
         }
-        // var levels;
-        // console.log(result.rows);
         res.send(result.rows);
     })
 })
