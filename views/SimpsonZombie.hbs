@@ -9,6 +9,8 @@
     </head>
     <body>
         <div class="header">
+            <div class="family"><img src="img/family.png" />
+            </div>
             <p><h1 id="logo"> The Simpson's</h1></p>
             <p><h1 id="after">The Simpson's </h1>    </p><p><h1 id="afterZ">Zombie</h1></p>
             <hr />
@@ -36,17 +38,14 @@
 
     </body>
 
-
-
 <script id="nextLevel" src="/game.js"></script>
 <script>
 
 function hideLogo() {
-    document.getElementById("logo").style.display = "none";
+    document.getElementById("logo").style.visibility = "hidden";
     // document.getElementById("#gamecanvas").hide();
 
 }
-
 
 $(document).ready(function() {
  $('#start').click(function() {$(this).hide();});
@@ -54,8 +53,8 @@ $(document).ready(function() {
  // $('#login').click(function() {$(this).hide();});
 
 setTimeout("hideLogo()", 3000);
-   $('#afterZ').delay(3000).fadeIn(1500);
-   $('#after').delay(3000).fadeIn(1500);
+   $('#afterZ').delay(3000).fadeIn(1500).css('visibility', 'visible');
+   $('#after').delay(3000).fadeIn(1500).css('visibility', 'visible');
 });
 </script>
 

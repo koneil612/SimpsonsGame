@@ -4,16 +4,43 @@
 }
 
 body {
-    background-color: yellow;
+    background-image: url(/img/clouds.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: Akbar;
 }
+.family {
+    top: 0px;
+    left: 0px;
+    float: left;
+    position: absolute;
+}
+.family img {
+    width: 300px;
+    height: 200px;
+}
+
+#logo {
+    color: black;
+}
+
 #after {
-    display: none;
+    visibility: hidden;
     text-decoration: line-through;
     color: red;
+    text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
 }
 #afterZ {
-    display: none;
+    visibility: hidden;
+    text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
     color: red;
     font-size: 44px;
 }

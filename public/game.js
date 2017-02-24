@@ -88,6 +88,7 @@ var screenZombies = [];
 // TODO: can't get this working.
 // ** Do we want to add an IF here? IF next level is clicked then go to level++?
 function getLevel(){
+    if($('#levelup').click) {
     level ++;
     $.ajax({
         url: "/get_level",
@@ -98,6 +99,7 @@ function getLevel(){
         stage:level
         }
     });
+} else start the game normally?
 }
 
 // creating our zombie using an ajax request pulling the
@@ -250,7 +252,6 @@ function handleCollisions() {
   screenZombies.forEach(function(zombie){
       if (collision(heroPos, zombie)) {
         hero.src = "img/wiggum-zombiesm.png";
-        //   gameOver = setTimeout(function(){true}, 2000);
         setTimeout(function(){gameOver=true;},3000);
         bullet.active = false;
         clearInterval(timer);
@@ -286,9 +287,6 @@ function shot(bullet, z) {
     }
     return true;
   }
-
-
-
 
 function update() {
     heroBullets.forEach(function(bullet) {
