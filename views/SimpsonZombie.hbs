@@ -21,13 +21,16 @@
             <p>Score: </p><p id="score"></p>
         </div>
         <div id="status-area">
-            <button id="levelup" onClick="next()"> Next Level</button>
+
         </div>
         <div id="container">
                 <canvas id="canvas1"></canvas>
                 <div id="menu">
                     <button id="start" onClick="startgame()"> Start Game
                     </button>
+                    <button id="levelup" onClick="next()"> Next Level</button>
+                    <!-- <button id="login" onClick="login()"> Log In
+                    </button> -->
                 </div>
             </div>
 
@@ -47,6 +50,8 @@ function hideLogo() {
 
 $(document).ready(function() {
  $('#start').click(function() {$(this).hide();});
+ $('#levelup').click(function() {$(this).hide();});
+ // $('#login').click(function() {$(this).hide();});
 
 setTimeout("hideLogo()", 3000);
    $('#afterZ').delay(3000).fadeIn(1500);

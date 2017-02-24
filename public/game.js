@@ -46,8 +46,8 @@ function bullet(I) {
 
 var hero = new Image();
 hero.src = "img/wiggum.png";
-// hero.height = 32;
-// hero.width = 32;
+
+
 var heroPos = {
     x: 200,
     y: 100,
@@ -58,8 +58,6 @@ var heroPos = {
 };
 
 hero.shoot = function() {
-    // console.log("i'm shooting");
-    // console.log(heroBullets);
     var bulletPosition = this.midpoint();
 
     heroBullets.push(bullet({
@@ -75,8 +73,6 @@ hero.midpoint = function() {
         y: this.y + this.height/2
     };
 };
-
-
 
 
 zombie.add = function() {
@@ -98,7 +94,7 @@ function getLevel(){
         dataType: 'json',
         async: false,
         data: {
-            stage:level
+        stage:level
         }
     });
 }
@@ -252,11 +248,12 @@ function handleCollisions() {
 
   screenZombies.forEach(function(zombie){
       if (collision(heroPos, zombie)) {
-          hero.src = "img/wiggum-zombiesm.png";
-          gameOver = true;
-          bullet.active = false;
-          clearInterval(timer);
-          clearInterval(clockb);
+        hero.src = "img/wiggum-zombiesm.png";
+        //   gameOver = setTimeout(function(){true}, 2000);
+        setTimeout(gameOver(){true}, 2000);
+        bullet.active = false;
+        clearInterval(timer);
+        clearInterval(clockb);
 
       };
   });
@@ -389,7 +386,6 @@ function main() {
 
     } else if (gameOver) {
         (function($) {
-
         $.fn.flash_message = function(options) {
             options = $.extend({
                 text: 'Done',
@@ -399,14 +395,13 @@ function main() {
             }, options);
 
             return $(this).each(function() {
-                if ($(this).parent().find('flash_message').get(0) )
+                if ($(this).parent().find('flash_message').get(0))
                 return;
 
                 var message = $('<span />', {'class': 'flash_message' + options.class_name, text: options.text}).hide().fadeIn('fast');
 
                 $(this)[options.how](message);
-
-                message.delay(options.time).fadeOut('very slow', function() {
+                message.fadeOut('very slow', function() {
                     $(this).remove();
                 });
             });
@@ -446,7 +441,7 @@ function startgame() {
     clockb = setInterval(gameClock, 1000);
 }
 
-// FIXME: buttons stack
+// FIXME: buttons stack ***************--- i stacked them good sir. but as we are aware it's levling up. super lame.
 function next() {
     getLevel();
     // console.log(level);

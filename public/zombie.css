@@ -41,19 +41,20 @@ body {
     height: 710px;
     margin: 0 auto;
     position: relative;
+    background-image: url('img/locations/background.png');
+    /*opacity: .7;*/
 }
 
 canvas {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url('img/locations/background.png');
-    opacity: .7;
+
 }
 
 #canvas1 {
     text-align: center;
-    z-index: 0;
+    z-index: 2;
     width: 895px;
     height: 605px;
 }
@@ -78,12 +79,17 @@ button {
     z-index: 5;
 }
 
-/*#start {
+#start {
     left: 40%;
-    top: 40%;
-}*/
+}
 
+#login {
+    left: 40%;
+    top: 75px;
+}
 
 #levelup {
+    left: 40%;
+    top: 75px;
     display: none;
 }
