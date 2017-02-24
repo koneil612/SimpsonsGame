@@ -105,7 +105,7 @@ function getLevel(){
 });
 }
 // } else start the game normally?
-// }
+// } I SAID NO! (╬ ಠ益ಠ)
 
 // creating our zombie using an ajax request pulling the
 // images from postgres
