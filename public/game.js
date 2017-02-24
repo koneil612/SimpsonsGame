@@ -87,20 +87,18 @@ var screenZombies = [];
 
 // TODO: can't get this working.
 // ** Do we want to add an IF here? IF next level is clicked then go to level++?
-function getLevel(){
-    if($('#levelup').click) {
-    level ++;
+function setLevel(){
+    var data = {"stage": level}
     $.ajax({
-        url: "/get_level",
-        type: 'post',
+        url: "/set_level",
+        type: 'POST',
         dataType: 'json',
-        async: false,
-        data: {
-        stage:level
-        }
-    });
-} else start the game normally?
+        data: data
+});
+console.log(data);
 }
+// } else start the game normally?
+// }
 
 // creating our zombie using an ajax request pulling the
 // images from postgres
@@ -415,7 +413,7 @@ function main() {
 
 }
 function startgame() {
-    getLevel();
+    level ++;
     // console.log(level);
     clearInterval(timer);
     on = false;
@@ -440,7 +438,7 @@ function startgame() {
 
 // FIXME: buttons stack ***************--- i stacked them good sir. but as we are aware it's levling up. super lame.
 function next() {
-    getLevel();
+    level ++;
     // console.log(level);
     clearInterval(timer);
     on = false;
@@ -456,6 +454,7 @@ function next() {
     screenZombies = [];
     heroBullets = [];
     zombie.add();
+    setLevel();
     main();
     timer = setInterval(addZombies, 1 * 6000);
     clock = 30;
