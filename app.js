@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 const pg = require('pg');
 const path = require('path');
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:rocket@localhost:5432/simpsons';
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/simpsons';
 const app = express();
 
 app.use(bodyParser.json());
@@ -41,7 +41,7 @@ app.get('/get_zombie', function(req, res) {
        }
        var zombies;
        var number = Math.round(Math.random()* results.rows.length-1);
-       console.log("random number is " + number);
+    //    console.log("random number is " + number);
        var img = results.rows[number].img_path;
        console.log("req level is "+level);
        client.query("SELECT * FROM levels WHERE level =" + level, function(err, results) {
