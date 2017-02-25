@@ -416,7 +416,7 @@ function main() {
         };
         })(jQuery);
             $('#status-area').flash_message({
-            text: 'Sucks to suck!',
+            text: 'HA HA!',
             how: 'append'
             });
             $('#start').show();
