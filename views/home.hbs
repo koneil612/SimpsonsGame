@@ -12,7 +12,7 @@
             <div class="family"><img src="img/family.png" />
             </div>
             <p><h1 id="logo"> The Simpson's</h1></p>
-            <p><h1 id="after">The Simpson's </h1>    </p><p><h1 id="afterZ">Zombie</h1></p>
+            <p><h1 id="after">The Simpson's </h1> </p><p><h1 id="afterZ">Zombie</h1></p>
             <hr />
         </div>
         <div class="signin">
@@ -22,39 +22,18 @@
                 <br>
                 <input type="text" name="name" placeholder="El Barto">
                 <br>
-                <br>
-                <input type="submit" name="" value="Let's Play">
+                <input id="password-login" type="password" name="password" placeholder="El Secrets">
+                <br /><br />
+                <input type="submit" name="" class="button" value="Let's Play">
             </form>
         </div>
-        <!-- <div class="leftside">
-        <p>Timer: </p><p id="timer">30</p>
-
-        </div>
-        <div class="rightside">
-            <p>Score: </p><p id="score"></p>
-        </div>
-        <div id="status-area">
-
-        </div>
-        <div id="container">
-                <canvas id="canvas1"></canvas>
-                <div id="menu">
-                    <button method="POST" id="start" onClick="startgame()"> Start Game
-                    </button>
-                    <button id="levelup" onClick="next()"> Next Level</button>
-                    <button id="login" onClick="login()"> Log In
-                    </button>
-                </div>
-            </div> -->
-
     </body>
 
 <script id="nextLevel" src="/game.js"></script>
 <script>
 
 function hideLogo() {
-    document.getElementById("logo").style.visibility = "hidden";
-    // document.getElementById("#gamecanvas").hide();
+    document.getElementById("logo").style.display = "none";
 
 }
 
@@ -66,6 +45,8 @@ $(document).ready(function() {
 setTimeout("hideLogo()", 3000);
    $('#afterZ').delay(3000).fadeIn(1500).css('visibility', 'visible');
    $('#after').delay(3000).fadeIn(1500).css('visibility', 'visible');
+   $('.family').delay(3000).fadeIn(1500).css('visibility', 'visible');
+   // $('#logo').delay(3000).zoomOut(1500).css('visibility', 'visible');
 });
 </script>
 

@@ -450,7 +450,6 @@ function startgame() {
     clockb = setInterval(gameClock, 1000);
 }
 
-// FIXME: buttons stack ***************--- i stacked them good sir. but as we are aware it's levling up. super lame.
 function next() {
     level ++;
     clearInterval(timer);

@@ -4,35 +4,29 @@
         <meta charset="utf-8">
         <title>Simpson Zombies</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link href="/zombie.css" rel="stylesheet">
     </head>
     <body>
-        <!-- <div class="header">
-            <div class="family"><img src="img/family.png" />
+        <div class="header">
+            <div class="couch"><img src="/img/couch.png" />
             </div>
-            <p><h1 id="logo"> The Simpson's</h1></p>
-            <p><h1 id="after">The Simpson's </h1>    </p><p><h1 id="afterZ">Zombie</h1></p>
+            <p><h1 id="logo">The Simpson's </h1>    </p><p><h1 id="logo">Zombie</h1></p>
             <hr />
-        </div> -->
-        <div class="leftside">
-        <p>Timer: </p><p id="timer">30</p>
+            <div id="status-area">
+                <div class="left"><p>Timer: </p><p id="timer">30</p></div>
+                <div class="right">Score:<p id="score"></p></div>
 
+            </div>
         </div>
-        <div class="rightside">
-            <p>Score: </p><p id="score"></p>
-        </div>
-        <div id="status-area">
 
-        </div>
         <div id="container">
                 <canvas id="canvas1"></canvas>
                 <div id="menu">
                     <button method="POST" id="start" onClick="startgame()"> Start Game
                     </button>
                     <button id="levelup" onClick="next()"> Next Level</button>
-                    <!-- <button id="login" onClick="login()"> Log In
-                    </button> -->
                 </div>
             </div>
 
@@ -41,21 +35,11 @@
 <script id="nextLevel" src="/game.js"></script>
 <script>
 
-function hideLogo() {
-    document.getElementById("logo").style.visibility = "hidden";
-    // document.getElementById("#gamecanvas").hide();
-
-}
 
 $(document).ready(function() {
  $('#start').click(function() {$(this).hide();});
  $('#levelup').click(function() {$(this).hide();});
- // $('#login').click(function() {$(this).hide();});
 
-setTimeout("hideLogo()", 3000);
-   $('#afterZ').delay(3000).fadeIn(1500).css('visibility', 'visible');
-   $('#after').delay(3000).fadeIn(1500).css('visibility', 'visible');
-});
 </script>
 
 </html>
