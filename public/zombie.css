@@ -9,15 +9,25 @@ body {
     background-size: cover;
     font-family: Akbar;
 }
+
 .family {
     top: 0px;
     left: 0px;
     float: left;
     position: absolute;
+    display: none;
 }
+
 .family img {
     width: 300px;
     height: 200px;
+}
+
+.couch, .couch img{
+    top: 9px;
+    left: 35px;
+    /*float: left;*/
+    position: absolute;
 }
 
 #logo {
@@ -25,7 +35,7 @@ body {
 }
 
 #after {
-    visibility: hidden;
+    display: none;
     text-decoration: line-through;
     color: #d10808;
     text-shadow:
@@ -35,7 +45,7 @@ body {
     1px 1px 0 #0e0303;
 }
 #afterZ {
-    visibility: hidden;
+    display: none;
     text-shadow:
     -1px -1px 0 #0e0303,
     1px -1px 0 #0e0303,
@@ -45,17 +55,20 @@ body {
     font-size: 44px;
 }
 .header {
+    /*visibility: hidden;*/
     text-align: center;
     font-size: 22px;
     color: #0e0303;
 }
 
-.leftside {
-    float: left;
+
+.left {
+    float: right;
 }
 
-.rightside {
-    float: right;
+.right {
+    left: 150px;
+    /*position: relative;*/
 }
 
 #status-area {
@@ -65,7 +78,8 @@ body {
 
 #container {
     width: 900px;
-    height: 710px;
+    height: 650px;
+    border: 10px black solid;
     margin: 0 auto;
     position: relative;
     background-image: url('img/locations/background.png');
@@ -94,7 +108,7 @@ canvas {
 	left: 275px;
 }
 
-button {
+button, .button {
     width: 200px;
     height: 50px;
     background-color: #0000ff;
@@ -104,6 +118,10 @@ button {
     font-size: 20px;
     position: absolute;
     z-index: 5;
+}
+
+.button {
+    text-align: center;
 }
 
 #start {
