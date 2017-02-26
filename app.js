@@ -36,7 +36,7 @@ app.get('/highscores', function(req, res, next) {
         }
         var scores = []
         for (var i = 0; i < results.rows.length; i++){
-            scores.push(results.rows[i]);
+            scores.push(results.rows);
         }
         console.log(scores);
         res.render('scores.hbs', {scores: scores})
