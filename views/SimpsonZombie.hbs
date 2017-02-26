@@ -14,19 +14,30 @@
             </div>
             <p><h1 id="logo">The Simpson's </h1>    </p><p><h1 id="logo">Zombie</h1></p>
             <hr />
-            <div id="status-area">
-                <div class="left"><p>Timer: </p><p id="timer">30</p></div>
-                <div class="right">Score:<p id="score"></p></div>
-                <img src="/img/loser.png" />
+        </div>
+        <div id="status-area">
+        </div>
+        <div class="scorestuff">
+            <div class="right">Score:</div>
+            <div class="row">
+                <div class='left'>Timer:</div>
             </div>
+            <div class="row left">
+                <p id="timer">30</p>
+                <p id="score" class="right"></p>
+            </div>
+
         </div>
         <div id="container">
-                <canvas id="canvas1"></canvas>
-                <div id="menu">
-                    <button method="POST" id="start" onClick="startgame()"> Start Game
-                    </button>
-                    <button id="levelup" onClick="next()"> Next Level</button>
-                </div>
+            <canvas id="canvas1"></canvas>
+            <!-- <canvas id="canvas2"></canvas> -->
+            <div id="menu">
+                <button method="POST" id="start" onClick="startgame()"> Start Game
+                </button>
+                <button id="levelup" onClick="next()"> Next Level</button>
+            </div>
+                <!-- <img src="/img/loser.png" /> -->
+            </div>
             </div>
 
     </body>

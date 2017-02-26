@@ -367,7 +367,7 @@ function main() {
         $.fn.flash_message = function(options) {
             options = $.extend({
                 text: 'Done',
-                time: 3000,
+                time: 1000,
                 how: 'before',
                 class_name: ''
             }, options);
@@ -420,6 +420,7 @@ function main() {
             how: 'append'
             });
             $('#start').show();
+
     } else {
             requestAnimationFrame(main);
     }
