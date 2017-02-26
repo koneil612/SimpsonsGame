@@ -420,7 +420,13 @@ function main() {
             how: 'append'
             });
             $('#start').show();
+            $.ajax({
+                url: "/set_score",
+                type: 'post',
+                dataType: 'json',
+                data: {score: sum},
 
+        });
     } else {
             requestAnimationFrame(main);
     }

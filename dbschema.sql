@@ -27,6 +27,14 @@ CREATE TABLE "user" (
   PRIMARY KEY (id)
  );
 
+DROP TABLE IF EXISTS "scores";
+CREATE TABLE "scores" (
+  "id" serial,
+  "name" text,
+  "score" integer,
+  PRIMARY KEY (id)
+ );
+
 insert into zombies(name, img_path) values ('Bart','bartsm.png');insert into zombies(name, img_path) values ('Apu','apusm.png');insert into zombies(name, img_path) values ('Cat','catsm.png');insert into zombies(name, img_path) values ('Duffman','duffmansm.png');insert into zombies(name, img_path) values ('Flanders','flanderssm.png');insert into zombies(name, img_path) values ('Grandpa','granpasm.png');insert into zombies(name, img_path) values ('Homer','homersm.png');insert into zombies(name, img_path) values ('Krusty','krustysm.png');insert into zombies(name, img_path) values ('Lisa','lisasm.png');insert into zombies(name, img_path) values ('Marge','margesm.png');
 insert into zombies(name, img_path) values ('Martin','martinsm.png');insert into zombies(name, img_path) values ('Milhouse','milhousesm.png');insert into zombies(name, img_path) values ('Moe','moesm.png');insert into zombies(name, img_path) values ('Burns','mrburnssm.png');insert into zombies(name, img_path) values ('Nelson','nelsonsm.png');insert into zombies(name, img_path) values ('Otto','ottosm.png');insert into zombies(name, img_path) values ('Quimby','quimbysm.png');insert into zombies(name, img_path) values ('Lovejoy','revlovejoysm.png');insert into zombies(name, img_path) values ('Skinner','skinnersm.png'); insert into zombies(name, img_path) values ('Snake','snakesm.png');insert into zombies(name,img_path) values ('Willie','williesm.png');
 

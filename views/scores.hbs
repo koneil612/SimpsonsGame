@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Simpson Zombies</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link href="/zombie.css" rel="stylesheet">
@@ -15,22 +16,30 @@
 
             <div class="nav">
                 <a href="/highscores">High Scores</a><br />
-                <a href="/login">Login</a><br />
+                <a href="/">Login</a><br />
                 <a href="/game">Play</a>
             </div>
             <hr />
         </div>
+        {{# if scores.length}}
         <div class="scores">
             <table>
                 <tr class="table-head">
                     <th>Name</th>
                     <th class="second">Score</th>
                 </tr>
+                {{# each scores }}
+                {{# each this}}
                 <tr class="table-d">
-                    <td class="move">Marvin</td>
-                    <td class="second move">1,000,000</td>
+                    <td class="move">{{ scores.name }}</td>
+                    <td class="second move">{{ scores.score }}</td>
                 </tr>
+                {{/each}}
+                {{/each}}
             </table>
+            {{ else }}
+            <p>GO AWAY!</p>
+            {{/if}}
         </div>
 
     </body>
