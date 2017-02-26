@@ -54,6 +54,18 @@ body {
     color: #d10808;
     font-size: 44px;
 }
+
+.nav {
+    top: -150px;
+    float: right;
+    position: relative;
+}
+
+.nav a{
+    text-align: right;
+    text-decoration: none;
+    color: white;
+}
 .header {
     /*visibility: hidden;*/
     text-align: center;
