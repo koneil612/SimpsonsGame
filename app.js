@@ -45,7 +45,7 @@ app.get('/get_zombie', function(req, res) {
        var img = results.rows[number].img_path;
        console.log("req level is "+level);
        client.query("SELECT * FROM levels WHERE level =" + level, function(err, results) {
-           console.log("level info:");
+        //    console.log("level info:");
         //    console.log(results);
            if (err) {
                throw err;
