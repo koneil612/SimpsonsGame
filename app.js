@@ -3,12 +3,17 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 const pg = require('pg');
 const path = require('path');
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/simpsons';
+const session = require('client-sessions');
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:rocket@localhost:5432/simpsons';
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static("public"));
+app.use(session({
+    cookieName: 'session',
+    secret: 'wooooooooo'
+}));
 app.set('view engine', 'hbs');
 
 var client = new pg.Client(connectionString);
@@ -24,12 +29,29 @@ app.get('/', function(req, res) {
     res.render('home.hbs')
 });
 
-app.get('/highscores', function(req, res) {
-    res.render('scores.hbs')
+app.get('/highscores', function(req, res, next) {
+    client.query("SELECT * FROM scores where score > 0 order by score desc limit 10", function(err, results){
+        if (err){
+            throw err;
+        }
+        var scores = []
+        for (var i = 0; i < results.rows.length; i++){
+            scores.push(results.rows[i]);
+        }
+        console.log(scores);
+        res.render('scores.hbs', {scores: scores})
+    });
 })
 
 app.post('/signin', function(req, res){
+    var name = req.body.name;
+    req.session.name = name;
+    console.log(req.session.name);
     res.redirect('/game')
+})
+
+app.get('/signup', function(req, res) {
+    res.render('signup.hbs')
 })
 
 app.get('/get_zombie', function(req, res) {
@@ -79,6 +101,16 @@ app.get('/get_level', function(req,res) {
         res.json(data);
     });
 });
+
+app.post('/set_score', function(req, res) {
+    var score = req.body.score;
+    client.query("INSERT INTO scores(name, score) VALUES ('" + req.session.name + "', '" + score + "')", function(err, results) {
+        if (err){
+            throw err;
+        }
+    });
+    req.session.reset();
+})
 
 app.listen(3000, function() {
     console.log("3000!");
