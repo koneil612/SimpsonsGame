@@ -41,6 +41,8 @@
             <div id="menu">
                 <button method="POST" id="start" onClick="startgame()"> Start Game
                 </button>
+                <button method="POST" id="reset" onClick="startgame()"> Try Again
+                </button>
                 <button id="levelup" onClick="next()"> Next Level</button>
             </div>
                 <!-- <img src="/img/loser.png" /> -->
@@ -55,6 +57,7 @@
 $(document).ready(function() {
  $('#start').click(function() {$(this).hide();});
  $('#levelup').click(function() {$(this).hide();});
+ $('#reset').click(function() {$(this).hide();});
  });
 
 </script>
