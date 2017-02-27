@@ -57,7 +57,11 @@
 $(document).ready(function() {
  $('#start').click(function() {$(this).hide();});
  $('#levelup').click(function() {$(this).hide();});
- $('#reset').click(function() {$(this).hide();});
+ $('#reset').click(function() {
+     $(this).hide();
+     $(this).post('/reset')
+});
+
  });
 
 </script>

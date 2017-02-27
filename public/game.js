@@ -480,10 +480,6 @@ function next() {
 
 }
 
-function reset() {
-    $.post('/reset')
 
-});
-}
 
 // main();
