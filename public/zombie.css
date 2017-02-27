@@ -73,11 +73,6 @@ body {
     color: #0e0303;
 }
 
-.scorestuff {
-    color: yellow;
-    z-index: 5;
-    position: relative;
-}
 .left {
     float: left;
     width: 30%;
@@ -90,10 +85,11 @@ body {
     padding-top: 5px;
 }
 .scorestuff {
-    left: 172px;
+    color: yellow;
+    z-index: 5;
+    position: relative;
     top: 0px;
     z-index: 5;
-    width: 920px;
     height: 50px;
     background-color: black;
 }
