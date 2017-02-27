@@ -431,8 +431,8 @@ function main() {
 
 }
 function startgame() {
-    // console.log(src);
-    getLevel();
+    level = 1;
+    gameOver=false;
     // console.log(level);
     clearInterval(timer);
     on = false;
@@ -449,6 +449,7 @@ function startgame() {
     screenZombies = [];
     heroBullets = [];
     zombie.add();
+    getLevel();
     main();
     timer = setInterval(addZombies, 1 * 6000);
     clock;
@@ -477,6 +478,12 @@ function next() {
     clock;
     clockb = setInterval(gameClock, 1000);
 
+}
+
+function reset() {
+    $.post('/reset')
+
+});
 }
 
 // main();

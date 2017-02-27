@@ -4,7 +4,7 @@ const router = express.Router();
 const pg = require('pg');
 const path = require('path');
 const session = require('client-sessions');
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/simpsons';
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:rocket@localhost:5432/simpsons';
 const app = express();
 
 app.use(bodyParser.json());
@@ -21,7 +21,11 @@ client.connect();
 
 app.get('/game', function(req, res) {
     // ヽ(´ー｀)ノ
-res.render('SimpsonZombie.hbs')
+    if (req.session.name){
+        res.render('SimpsonZombie.hbs')
+    } else {
+        res.redirect('/')
+    }
 
 });
 
@@ -49,6 +53,10 @@ app.post('/signin', function(req, res){
     console.log(req.session.name);
     res.redirect('/game')
 })
+
+app.post('/reset', function(req, res) {
+    res.redirect('/')
+});
 
 app.get('/signup', function(req, res) {
     res.render('signup.hbs')
@@ -85,6 +93,7 @@ app.get('/get_zombie', function(req, res) {
 
 // DONE ヽ(´▽`)/
 app.get('/get_level', function(req,res) {
+    console.log(req.session.name);
     var level = req.query.stage;
     // console.log(res);
     client.query("SELECT * FROM levels WHERE level =" + level, function(err, result) {
@@ -110,7 +119,7 @@ app.post('/set_score', function(req, res) {
         }
     });
     req.session.reset();
-})
+});
 
 app.listen(3000, function() {
     console.log("3000!");
