@@ -4,7 +4,7 @@ const router = express.Router();
 const pg = require('pg');
 const path = require('path');
 const session = require('client-sessions');
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:rocket@localhost:5432/simpsons';
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/simpsons';
 const app = express();
 
 app.use(bodyParser.json());
@@ -65,7 +65,7 @@ app.get('/get_zombie', function(req, res) {
        var number = Math.round(Math.random()* results.rows.length-1);
     //    console.log("random number is " + number);
        var img = results.rows[number].img_path;
-       console.log("req level is "+level);
+    //    console.log("req level is "+level);
        client.query("SELECT * FROM levels WHERE level =" + level, function(err, results) {
         //    console.log("level info:");
         //    console.log(results);
@@ -97,7 +97,7 @@ app.get('/get_level', function(req,res) {
             clock: result.rows[0].timer,
             zAmount: result.rows[0].amount
         }
-        console.log(data);
+        // console.log(data);
         res.json(data);
     });
 });

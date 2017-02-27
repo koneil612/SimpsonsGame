@@ -163,7 +163,7 @@ function zombie(I) {
             this.dirX = Math.floor(Math.random() * 3) - .9;
             this.dirY = Math.floor(Math.random() * 3) - .9;
             this.timeout = 25;
-            //   player.speed = Math.floor(Math.random() * 1) - 5;
+
         }
     }
 
@@ -249,7 +249,6 @@ function handleCollisions() {
          screenZombies.forEach(function(z){
              if (shot(bullet, z)) {
                  sum +=10;
-                 console.log("you shot him!");
                  z.active = false;
                  bullet.active = false;
              };
@@ -329,7 +328,6 @@ function draw() {
     });
 
     screenZombies.forEach(function(z) {
-        // console.log(z);
         z.draw()
     });
 };
@@ -339,7 +337,7 @@ zombie.add();
 var addZombies = function() {
     if(screenZombies.length === zAmount) clearInterval(timer);
     zombie.add();
-    console.log(screenZombies);
+    // console.log(screenZombies);
 };
 
 var clock;
@@ -467,15 +465,15 @@ function next() {
         y: 100,
         dirX: 0,
         dirY: 0,
-        speed: 2,
-        timeout: 25
+        speed: 2.5,
+        timeout: 10
     };
     screenZombies = [];
     heroBullets = [];
     zombie.add();
     getLevel();
     main();
-    timer = setInterval(addZombies, 1 * 6000);
+    timer = setInterval(addZombies, 1 * 3000);
     clock;
     clockb = setInterval(gameClock, 1000);
 

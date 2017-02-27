@@ -45,8 +45,6 @@ function bullet(I) {
 
 var hero = new Image();
 hero.src = "img/wiggum.png";
-// hero.height = 32;
-// hero.width = 32;
 var heroPos = {
     x: 200,
     y: 100,
@@ -57,8 +55,6 @@ var heroPos = {
 };
 
 hero.shoot = function() {
-    // console.log("i'm shooting");
-    // console.log(heroBullets);
     var bulletPosition = this.midpoint();
 
     heroBullets.push(bullet({
@@ -219,22 +215,6 @@ window.addEventListener('keydown', function(event) {
     border(hero);
 });
 
-// window.addEventListener('keyup', function(event) {
-//     var key = event.keyCode;
-//     if (key == 37) { //left
-//         heroPos.dirX = 0;
-//     }
-//     if (key == 39) { //right
-//         heroPos.dirX = 0;
-//     }
-//     if (key == 38) { //up
-//         heroPos.dirY = 0;
-//     }
-//     if (key == 40) { //down
-//         heroPos.dirY = 0;
-//     }
-// });
-
 function handleCollisions() {
      heroBullets.forEach(function(bullet){
          screenZombies.forEach(function(z){
@@ -256,18 +236,6 @@ function handleCollisions() {
 
  }
 
-  // function collision(a, b) {
-  //   if (a.x +32 < b.x){
-  //       return false;
-  //   } else if (b.x + 32 < a.x) {
-  //     return false;
-  // } else if (a.y + 32 < b.y) {
-  //     return false;
-  // } else if (b.y + 32 < a.y ) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
 
 function collision(heroPos, zombie) {
   if (heroPos.x +32 < zombie.x){
