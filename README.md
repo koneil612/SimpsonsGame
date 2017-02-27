@@ -49,6 +49,6 @@ Give X amount of bullets vs. unlimited
 
 
 <h2>Code Snippets and Screen Shots:</h2>
-<img src="/public/img/login.png" /><br/>
+<center><img src="/public/img/login.png" /><br/>
 <img src="/public/img/play.png" /><br />
-<img src="/public/img/gameover.png" />
+<img src="/public/img/gameover.png" /></center>
