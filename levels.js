@@ -103,7 +103,8 @@ zombie.add = function() {
 
 var screenZombies = [];
 function zombie(I) {
-    var number = Math.round(Math.random()* 21);
+    //randpm number betweeen 0 and 21
+    var number = 1+ Math.round(Math.random()* (20));
     I.active = true;
     I.src = "img/" + zombies[number];
     I.x = Math.round(Math.random()* 300);
