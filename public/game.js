@@ -395,7 +395,7 @@ function main() {
         $.fn.flash_message = function(options) {
             options = $.extend({
                 text: 'Done',
-                time: 3000,
+                time: 6000,
                 how: 'before',
                 class_name: ''
             }, options);
@@ -407,9 +407,9 @@ function main() {
                 var message = $('<span />', {'class': 'flash_message' + options.class_name, text: options.text}).hide().fadeIn('fast');
 
                 $(this)[options.how](message);
-                message.fadeOut('very slow', function() {
-                    $(this).remove();
-                });
+                // message.fadeOut('slow', function() {
+                //     $(this).remove();
+                // });
             });
         };
         })(jQuery);
@@ -417,7 +417,8 @@ function main() {
             text: 'HA HA!',
             how: 'append'
             });
-            $('#start').show();
+            $('#loser').show();
+            $('#reset').show();
             $.ajax({
                 url: "/set_score",
                 type: 'post',
@@ -425,13 +426,13 @@ function main() {
                 data: {score: sum},
 
         });
+        level = 1;
     } else {
             requestAnimationFrame(main);
     }
 
 }
 function startgame() {
-    level = 1;
     gameOver=false;
     // console.log(level);
     clearInterval(timer);

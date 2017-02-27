@@ -20,34 +20,41 @@
             </div>
             <hr />
         </div>
-        <div id="status-area">
-        </div>
-        <div id="container">
-        <div class="scorestuff">
-            <div>
-                <div class='left'>Timer:
-                <p id="timer">30</p>
-                </div>
-                <div class='left'>High Score:</div>
-                <p id="highscore"></p>
-                <div class="left">Score:
-                <p id="score"></p>
-                </div>
-            </div>
-        </div>
-            <canvas id="canvas1"></canvas>
-            <div id="menu">
-                <button method="POST" id="start" onClick="startgame()"> Start Game
-                </button>
-                <button method="POST" id="reset" onClick="reset()"> Try Again
-                </button>
+        <center>
 
-                <button id="levelup" onClick="next()"> Next Level</button>
+            <div id="gameboard">
+                <div class="scorestuff">
+                    <div>
+                        <div class='left'>Timer:
+                            <p id="timer">30</p>
+                        </div>
+                        <div class='left'>High Score:
+
+                        </div>
+                        <p id="highscore"></p>
+                        <div class="left">Score:
+                            <p id="score"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="container">
+                    <canvas id="canvas1"></canvas>
+                    <div id="menu">
+                        <div id="status-area">
+                            <img id="loser" src="/img/loser.png" />
+                        </div>
+                        <button method="POST" id="start" onClick="startgame()"> Start Game
+                        </button>
+                        <button id="reset"> Try Again
+                        </button>
+
+                        <button id="levelup" onClick="next()"> Next Level</button>
+                    </div>
+                </div>
             </div>
-                <!-- <img src="/img/loser.png" /> -->
-            </div>
-            </div>
-            </div>
+        </center>
+
 
     </body>
 
@@ -58,8 +65,7 @@ $(document).ready(function() {
  $('#start').click(function() {$(this).hide();});
  $('#levelup').click(function() {$(this).hide();});
  $('#reset').click(function() {
-     $(this).hide();
-     $(this).post('/reset')
+     window.location = "/reset";
 });
 
  });

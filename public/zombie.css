@@ -8,6 +8,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     font-family: Akbar;
+    margin: 0;
 }
 
 .family {
@@ -89,25 +90,35 @@ body {
     z-index: 5;
     position: relative;
     top: 0px;
-    z-index: 5;
+    z-index: 1;
     height: 50px;
     background-color: black;
 }
 .scorestuff p {
     margin: 0px;
 }
-
+#loser {
+    display: none;
+}
 #status-area {
+    color: yellow;
+    font-size: 30px;
     text-align: center;
     z-index: 1;
 }
-
-#container {
+#gameboard {
+    text-align: center;
+    z-index: 1;
+    width: 900px;
+    height: 775px;
+    background-color: black;
+    border: 10px black solid;
+}
+#container  {
     width: 900px;
     height: 700px;
-    border: 10px black solid;
     margin: 0 auto;
-    position: relative;
+    position: absolute;
     background-image: url('img/locations/background.png');
 }
 
@@ -165,6 +176,12 @@ button, .button {
     display: none;
 }
 
+#reset {
+    left: 40%;
+    top: 100px;
+    display: none;
+}
+
 /* Home page */
 .signin {
     margin-top: 50px;
@@ -173,7 +190,6 @@ button, .button {
 }
 .scores {
     margin-top: 50px;
-    margin-left: 400px;
     font-size: 30px;
 }
 .second {
@@ -181,4 +197,9 @@ button, .button {
 }
 .move {
     padding-top: 50px;
+}
+.table-head {
+    text-decoration: underline;
+    font-size: 35px;
+    color: yellow;
 }

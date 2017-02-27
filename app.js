@@ -40,7 +40,7 @@ app.get('/highscores', function(req, res, next) {
         }
         var scores = []
         for (var i = 0; i < results.rows.length; i++){
-            scores.push(results.rows);
+            scores.push(results.rows[i]);
         }
         console.log(scores);
         res.render('scores.hbs', {scores: scores})
@@ -54,7 +54,8 @@ app.post('/signin', function(req, res){
     res.redirect('/game')
 })
 
-app.post('/reset', function(req, res) {
+app.get('/reset', function(req, res) {
+    req.session.reset();
     res.redirect('/')
 });
 
@@ -65,14 +66,16 @@ app.get('/signup', function(req, res) {
 app.get('/get_zombie', function(req, res) {
     //console.log(req);
     var level = req.query.level;
-    client.query("SELECT * FROM zombies", function(err, results) {
+    client.query("SELECT * FROM zombies order by random() limit 1", function(err, results) {
        if (err) {
            throw err;
        }
        var zombies;
-       var number = Math.round(Math.random()* results.rows.length-1);
+    //    var number = 1 + Math.round(Math.random()* results.rows.length - 1);
+    //    console.log(number);
     //    console.log("random number is " + number);
-       var img = results.rows[number].img_path;
+    console.log(results);
+       var img = results.rows[0].img_path;
     //    console.log("req level is "+level);
        client.query("SELECT * FROM levels WHERE level =" + level, function(err, results) {
         //    console.log("level info:");

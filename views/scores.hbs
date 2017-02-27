@@ -22,25 +22,26 @@
             <hr />
         </div>
         {{# if scores.length}}
-        <div class="scores">
-            <table>
-                <tr class="table-head">
-                    <th>Name</th>
-                    <th class="second">Score</th>
-                </tr>
-                {{# each scores }}
-                {{# each this}}
-                <tr class="table-d">
-                    <td class="move">{{ this.name }}</td>
-                    <td class="second move">{{ this.score }}</td>
-                </tr>
-                {{/each}}
-                {{/each}}
-            </table>
-            {{ else }}
-            <p>GO AWAY!</p>
-            {{/if}}
-        </div>
+        <center>
+
+            <div class="scores">
+                <table>
+                    <tr class="table-head">
+                        <th>Name</th>
+                        <th class="second">Score</th>
+                    </tr>
+                    {{# each scores }}
+                    <tr class="table-d">
+                        <td class="move">{{ this.name }}</td>
+                        <td class="second move">{{ this.score }}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+                {{ else }}
+                <p>GO AWAY!</p>
+                {{/if}}
+            </div>
+        </center>
 
     </body>
 
