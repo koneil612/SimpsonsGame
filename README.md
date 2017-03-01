@@ -42,7 +42,6 @@ Give X amount of bullets vs. unlimited
 
 
 <h2>Challenges & Solutions:</h2>
-- Life
 - Having separate sets of collisions for the hero and the bullets
 - Randomizing the zombie images
 - AJAX requests
