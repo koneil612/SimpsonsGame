@@ -4,7 +4,7 @@ const router = express.Router();
 const pg = require('pg');
 const path = require('path');
 const session = require('client-sessions');
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:rocket@localhost:5432/simpsons';
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/simpsons';
 const app = express();
 
 app.use(bodyParser.json());
