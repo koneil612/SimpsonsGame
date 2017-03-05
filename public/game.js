@@ -7,6 +7,8 @@ var on = false; //toggle stuff
 var level = 1;
 gameOver = false;
 
+
+// setting up and getting the bullets to be able to shoot
 var heroBullets = [];
 function bullet(I) {
     I.active = true;
@@ -47,7 +49,6 @@ function bullet(I) {
 var hero = new Image();
 hero.src = "img/wiggum.png";
 
-
 var heroPos = {
     x: 200,
     y: 100,
@@ -86,8 +87,6 @@ var screenZombies = [];
 
 
 // DONE ┌(ㆆ㉨ㆆ)ʃ
-// ** Do we want to add an IF here? IF next level is clicked then go to level++?
-// NO, KRISTINE! (╯°□°）╯︵ ┻━┻
 //AJAX request for the level data
 var image;
 var zAmount;
@@ -104,8 +103,7 @@ function getLevel(){
         }
 });
 }
-// } else start the game normally?
-// } I SAID NO! (╬ ಠ益ಠ)
+
 
 // creating our zombie using an ajax request pulling the
 // images from postgres
@@ -192,6 +190,8 @@ function move(player) {
     player.y += player.dirY * player.speed;
     border(player);
 }
+
+//flipping wiggum when you hit enter
 function toggleOn() {
     on = true;
     hero.src = "img/wiggumflip.png";
@@ -244,6 +244,7 @@ window.addEventListener('keydown', function(event) {
 
 
 var sum = 0;
+//if a bullet and zombie collide:
 function handleCollisions() {
      heroBullets.forEach(function(bullet){
          screenZombies.forEach(function(z){
@@ -271,7 +272,7 @@ function handleCollisions() {
   });
 
  }
-
+//hero and zombie collision
 function collision(heroPos, zombie) {
   if (heroPos.x +32 < zombie.x){
       return false;
