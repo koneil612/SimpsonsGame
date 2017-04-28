@@ -6,6 +6,7 @@
 body {
     background-image: url(/img/clouds.png);
     background-repeat: no-repeat;
+    opacity: .5%;
     background-size: cover;
     font-family: Akbar;
     margin: 0;
